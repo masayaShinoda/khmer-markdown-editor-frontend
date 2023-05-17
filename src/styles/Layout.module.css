@@ -1,0 +1,19 @@
+.layout {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--clr_light);
+    color: var(--clr_dark);
+
+    display: grid;
+    grid-template-columns: 12.5rem auto;
+
+    transition: color 200ms ease-out, background-color 200ms ease-out;
+}
+.layout[data-theme="dark"] {
+    color: var(--clr_light);
+    background-color: var(--clr_dark);
+}
+
+.main {
+    padding: 2.5rem 2.5rem;
+}

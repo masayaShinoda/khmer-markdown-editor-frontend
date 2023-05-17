@@ -1,0 +1,83 @@
+@import "./fonts.css";
+@import "./typography.css";
+@import "./icons.css";
+
+html {
+    --font_primary: "Noto Sans Khmer Regular";
+    --font_primary_bold: "Noto Sans Khmer Bold";
+    --clr_dark: #141414;
+    --clr_dark_shade_a: #212121;
+    --clr_light: #f3f3f3;
+    
+    --clr_primary: #003153;
+    --clr_primary_shade_a: #004F86;
+    --clr_secondary: #0077CC;
+    --clr_secondary_shade_a: #0095FF;
+    --clr_secondary_shade_b: #33AAFF;
+
+    --clr_grey_shade_a: #444;
+    --clr_grey_shade_b: #666;
+    --clr_grey_shade_c: #999;
+    --clr_grey_shade_d: #ccc;
+    --clr_grey_shade_e: #ececec;
+    --clr_grey_shade_f: #f7f7f7;
+
+    --clr_success: #22bb33;
+    --clr_warning: hsl(35, 84%, 42%);
+    --clr_danger: #bb2124;
+    --clr_success_translucent:  rgba(34,187,51,.075);
+    --clr_warning_translucent: rgba(240,173,78,.075);
+    --clr_danger_translucent: rgba(187,33,36,.075);
+
+    --filter_clr_primary: invert(13%) sepia(89%) saturate(1510%) hue-rotate(181deg) brightness(92%) contrast(104%);
+    --filter_clr_primary_shade_a: invert(11%) sepia(76%) saturate(5252%) hue-rotate(193deg) brightness(105%) contrast(100%);
+    --filter_clr_secondary: invert(34%) sepia(93%) saturate(1142%) hue-rotate(178deg) brightness(87%) contrast(112%);
+    --filter_clr_secondary_shade_a: invert(41%) sepia(51%) saturate(4565%) hue-rotate(187deg) brightness(106%) contrast(104%);
+    --filter_clr_secondary_shade_b: invert(60%) sepia(24%) saturate(7489%) hue-rotate(186deg) brightness(107%) contrast(105%);
+    
+    --filter_clr_grey_shade_a: invert(19%) sepia(0%) saturate(0%) hue-rotate(160deg) brightness(135%) contrast(97%);
+    --filter_clr_grey_shade_b: invert(45%) sepia(0%) saturate(975%) hue-rotate(212deg) brightness(86%) contrast(89%);
+    --filter_clr_grey_shade_c: invert(74%) sepia(0%) saturate(1083%) hue-rotate(134deg) brightness(84%) contrast(84%);
+    --filter_clr_grey_shade_d: invert(100%) sepia(0%) saturate(5592%) hue-rotate(334deg) brightness(117%) contrast(60%);
+    --filter_clr_grey_shade_e: invert(97%) sepia(0%) saturate(2153%) hue-rotate(214deg) brightness(118%) contrast(85%);
+    --filter_clr_grey_shade_f: invert(99%) sepia(79%) saturate(166%) hue-rotate(243deg) brightness(114%) contrast(94%);
+
+    --box_shadow_primary: 0 .5rem .5rem rgba(0,0,0,0.05);
+}
+html [data-theme="dark"] {
+    --box_shadow_primary:  0 .5rem .5rem rgba(255,255,255,0.05);
+}
+
+* {
+    font-family: var(--font_primary);
+}
+[lang="km"] * {
+    /* outline: 1px solid green; */
+}
+
+
+h1, h2 {
+    color: #000;
+}
+[data-theme="dark"] h1,
+[data-theme="dark"] h2 {
+    color: #fff;
+}
+
+a {
+    transition: text-decoration 200ms ease-out, color 200ms ease-out;
+    text-decoration: none;
+    color: var(--clr_primary);
+}
+a:hover,
+a:focus {
+    text-decoration: underline;
+    color: var(--clr_secondary);
+}
+[data-theme="dark"] a {
+    color: var(--clr_secondary_shade_b);
+}
+[data-theme="dark"] a:hover,
+[data-theme="dark"] a:focus {
+    color: var(--clr_secondary_shade_a);
+}

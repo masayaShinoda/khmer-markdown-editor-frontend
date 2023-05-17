@@ -1,0 +1,41 @@
+.utils.bg_clr_primary {background-color: var(--clr_primary)}
+.utils.bg_clr_primary_shade_a {background-color: var(--clr_primary_shade_a)}
+.utils.bg_clr_secondary {background-color: var(--clr_secondary)}
+.utils.bg_clr_secondary_shade_a {background-color: var(--clr_secondary_shade_a)}
+.utils.bg_clr_secondary_shade_b {background-color: var(--clr_secondary_shade_b)}
+.utils.bg_clr_grey_shade_a {background-color: var(--clr_grey_shade_a)}
+.utils.bg_clr_grey_shade_b {background-color: var(--clr_grey_shade_b)}
+.utils.bg_clr_grey_shade_c {background-color: var(--clr_grey_shade_c)}
+.utils.bg_clr_grey_shade_d {background-color: var(--clr_grey_shade_d)}
+.utils.bg_clr_grey_shade_e {background-color: var(--clr_grey_shade_e)}
+.utils.bg_clr_grey_shade_f {background-color: var(--clr_grey_shade_f)}
+.utils.bg_clr_dark {background-color: var(--clr_dark)}
+.utils.bg_clr_light {background-color: var(--clr_light)}
+
+.utils.clr_primary {color: var(--clr_primary)}
+.utils.clr_primary_shade_a {color: var(--clr_primary_shade_a)}
+.utils.clr_secondary {color: var(--clr_secondary)}
+.utils.clr_secondary_shade_a {color: var(--clr_secondary_shade_a)}
+.utils.clr_secondary_shade_b {color: var(--clr_secondary_shade_b)}
+.utils.clr_grey_shade_a {color: var(--clr_grey_shade_a)}
+.utils.clr_grey_shade_b {color: var(--clr_grey_shade_b)}
+.utils.clr_grey_shade_c {color: var(--clr_grey_shade_c)}
+.utils.clr_grey_shade_d {color: var(--clr_grey_shade_d)}
+.utils.clr_grey_shade_e {color: var(--clr_grey_shade_e)}
+.utils.clr_grey_shade_f {color: var(--clr_grey_shade_f)}
+.utils.clr_dark {color: var(--clr_dark)}
+.utils.clr_light {color: var(--clr_light)}
+
+.utils.bg_clr_success {background-color: var(--clr_success);}
+.utils.bg_clr_warning {background-color: var(--clr_warning);}
+.utils.bg_clr_danger {background-color: var(--clr_danger);}
+.utils.bg_clr_success_translucent {background-color: var(--clr_success_translucent);}
+.utils.bg_clr_warning_translucent {background-color: var(--clr_warning_translucent);}
+.utils.bg_clr_danger_translucent {background-color: var(--clr_danger_translucent);}
+
+.utils.clr_success {color: var(--clr_success);}
+.utils.clr_warning {color: var(--clr_warning);}
+.utils.clr_danger {color: var(--clr_danger);}
+.utils.clr_success_translucent {color: var(--clr_success_translucent);}
+.utils.clr_warning_translucent {color: var(--clr_warning_translucent);}
+.utils.clr_danger_translucent {color: var(--clr_danger_translucent);}

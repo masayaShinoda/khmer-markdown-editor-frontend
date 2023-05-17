@@ -1,0 +1,53 @@
+html {
+    /* type scaling */
+    --type_scale_5: 3.052rem;
+    --type_scale_4: 2.441rem;
+    --type_scale_3: 1.563rem;
+    --type_scale_2: 1.25rem;
+    --type_scale_1: 1rem;
+
+    font-size: 100%; /* 16px */
+}
+html[lang="km"] {
+    /* bigger font for khmer site */
+    font-size: 110%;
+}
+
+@media screen and (max-width: 48em) {
+    html {
+        --type_scale_5: calc(3.052rem * 0.95);
+        --type_scale_4: calc(2.441rem * 0.95);
+        --type_scale_3: calc(1.563rem * 0.95);
+        --type_scale_2: calc(1.25rem * 0.95);
+        --type_scale_1: calc(1rem * 0.95);
+    }
+}
+
+body {
+    font-weight: 400;
+    line-height: 1.75;
+}
+  
+p {margin-bottom: 1rem;}
+
+h1, h2, h3, h4, h5 {
+    /* margin: 3rem 0 1.38rem; */
+    margin-bottom: 1.38rem;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 1.802rem;
+}
+
+h2 {font-size: 1.602rem;}
+
+h3 {font-size: 1.424rem;}
+
+h4 {font-size: 1.266rem;}
+
+h5 {font-size: 1.125rem;}
+
+small, .text_small {font-size: 0.889rem;}

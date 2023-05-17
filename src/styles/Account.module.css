@@ -1,0 +1,13 @@
+.form_wrapper {
+    width: 100%;
+    max-width: min(100%, 40em);
+}
+.form_wrapper input {
+    
+}
+.action_section {
+    margin: 1.25rem 0;
+}
+.messages_section {
+    display: flex; flex-direction: column; align-items: flex-start;
+}
