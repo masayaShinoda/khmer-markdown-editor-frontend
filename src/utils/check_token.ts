@@ -1,5 +1,5 @@
-export default async function login(username: string, password: string) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/token/`
+export default async function check_token(token: string) {
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/check-token/`
 
     try {
         const response = await fetch(url, {
@@ -8,8 +8,7 @@ export default async function login(username: string, password: string) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "username": username,
-                "password": password
+                "access_token": token,
             })
         })
         return response.json()

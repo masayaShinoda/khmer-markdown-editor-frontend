@@ -18,10 +18,6 @@
     margin-right: .5rem;
     filter: none;
 }
-[data-theme="dark"] .grid_item .icon {
-    filter: invert(0.92);
-}
-
 .grid_item_button {
     background: none;
     outline: none; border: none;

@@ -51,9 +51,6 @@ html [data-theme="dark"] {
 * {
     font-family: var(--font_primary);
 }
-[lang="km"] * {
-    /* outline: 1px solid green; */
-}
 
 
 h1, h2 {

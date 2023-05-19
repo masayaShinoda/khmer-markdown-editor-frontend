@@ -1,5 +1,7 @@
 import { FunctionComponent, useContext } from "react"
 import { UserContext } from "../../context/UserContext"
+import styles from "../../styles/Account.module.css"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
     user: {
@@ -8,22 +10,32 @@ interface Props {
 }
 
 const AccountDetails: FunctionComponent<Props> = (props: Props) => {
-    const { setUser } = useContext(UserContext)
+
+    const navigate = useNavigate()
+
+    const { setUser, setAccessToken } = useContext(UserContext)
 
     function handleSignOut() {
         setUser(null)
+        setAccessToken(null)
+        localStorage.removeItem("access_token")
+        navigate('/login')
     }
 
     return <div>
-        <h3>Account details</h3>
-        <h5>{props.user.username}</h5>
+        <h1>អំពីគណនី</h1>
+        <div className={styles.account_details_container}>
+            <h5 title="ឈ្មោះគណនីប្រើសម្រាប់ចូលប្រើប្រាស់កម្មវិធី">ឈ្មោះប្រើប្រាស់៖ <i className="icon hint"></i></h5>
+            <p>{props.user.username}</p>
+        </div>
 
         <button
             className="btn_main"
             aria-label="Sign out"
             onClick={handleSignOut}
         >
-            Sign out
+            <i className="icon sign_out"></i>
+            ចេញពីគណនី
         </button>
     </div>
 }

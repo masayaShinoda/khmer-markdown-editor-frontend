@@ -5,7 +5,8 @@
     font-size: var(--type_scale_1);
     padding: .25rem .875rem;
     background-color: #fff;
-    border-radius: .25rem;
+    border: 1px solid transparent;
+    border-radius: .5rem;
     box-shadow: var(--box_shadow_primary);
     cursor: pointer;
     transition: 
@@ -14,7 +15,7 @@
         background-color 200ms ease-out;
 }
 [data-theme="dark"] .btn_main {
-  background-color: var(--clr_grey_shade_b);
+  background-color: var(--clr_grey_shade_a);
   color: #fff;
 }
 .btn_main:hover,
@@ -39,10 +40,21 @@
 .btn_main:disabled:active {
     transform: none;
 }
+
 .btn_main.scale_2 {
+    padding: .5rem 1rem;
     font-size: var(--type_scale_2);
     border-radius: .5rem;
 }
+
+.btn_main .icon {
+  margin-right: .5rem;
+}
+.btn_main.scale_2 .icon {
+  width: 1.125rem; height: 1.125rem;
+  margin-right: .75rem;
+}
+
 /* inputs */
 .input_wrapper {
     display: flex;
@@ -130,3 +142,4 @@
     transform: rotate(360deg);
   }
 }
+

@@ -9,7 +9,7 @@ import Card from "./Card"
 import { UserContext } from "../../context/UserContext"
 
 const Dashboard: FunctionComponent = () => {
-  const { user } = useContext(UserContext)
+  const { user, accessToken } = useContext(UserContext)
 
 
   interface Article {
@@ -23,19 +23,21 @@ const Dashboard: FunctionComponent = () => {
   const [articles, setArticles] = useState<Array<Article>>([])
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_BACKEND_URL, 
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/articles`, 
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "token 279a8ec9dc96240e20c597733007bcc0bb30a727"
+          "Authorization": `Bearer ${accessToken}`
         }
       }
     )
       .then(res => res.json())
       .then(data => {
         if(data) {
-          setArticles(data.map((article: Article, index: number) => {
+          const articles: Array<Article> = Array.from(data)
+          
+          setArticles(articles.map((article: Article, index: number) => {
               return {
                 key: index,
                 id: article.id,
@@ -49,11 +51,11 @@ const Dashboard: FunctionComponent = () => {
           return "Error fetching data."
         }
       })
-  }, [])
+  }, [accessToken])
 
   return <div>
-    <h1>Dashboard</h1>
-    {user ? <p>Welcome {user.username}</p> : null}
+    <h1>ទំព័រដើម</h1>
+    {user ? <p>សួស្តី {user.username}។</p> : null}
     
     <div>
       {articles ? 

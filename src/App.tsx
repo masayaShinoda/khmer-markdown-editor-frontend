@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, Suspense, useState, useMemo } from "react"
+import { FunctionComponent, ReactNode, Suspense, useState, useRef, useMemo, useContext, useEffect } from "react"
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,49 +11,48 @@ import Editor from "./components/editor/Editor"
 import Account from "./components/account/Account"
 import LoginForm from "./components/account/LoginForm"
 import Settings from "./components/settings/Settings"
-import { UserContext } from "./context/UserContext"
 import LoadingSpinner from "./components/utils/LoadingSpinner"
 import NotFoundPage from "./components/404/404"
+import { UserContext, UserProvider } from "./context/UserContext"
 
 function App() {
-  const [user, setUser] = useState(null)
-  const providerValue = useMemo(() => ({ user, setUser }), [user, setUser])
 
   interface ProtectedRouteProps {
-    user: typeof user,
     children: ReactNode,
   }
 
   const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
-    if (props.user) {
-      return props.children
-    } else return <Navigate to={"/login"} state={{message: "សូមចូលទៅកាន់គណនីលោកអ្នកដើម្បីបន្ត។"}} />
+    const { user } = useContext(UserContext)
+
+    return (
+      user ? <>{props.children}</> : <Navigate to={"/login"} state={{message: "សូមចូលទៅកាន់គណនីលោកអ្នកដើម្បីបន្ត។"}} />
+    )
   }
 
   return (
     <Router>
       <Suspense fallback={<Layout><LoadingSpinner /><p style={{marginLeft: ".5rem"}}>Loading...</p></Layout>}>
         <Layout>
-          <UserContext.Provider value={providerValue}>
+          <UserProvider>
             <Routes>
+              <Route path="login" element={<LoginForm />} />
               <Route index 
                 element={
-                  <ProtectedRoute user={user}>
+                  <ProtectedRoute>
                     <Dashboard />
                   </ProtectedRoute>
                 } 
               />
               <Route path="editor" 
                 element={
-                  <ProtectedRoute user={user}>
+                  <ProtectedRoute>
                     <Editor />
                   </ProtectedRoute>
                 } 
               />
-              <Route path="login" element={<LoginForm />} />
               <Route path="account" 
                 element={
-                  <ProtectedRoute user={user}>
+                  <ProtectedRoute>
                     <Account />
                   </ProtectedRoute>
                 } 
@@ -63,7 +62,7 @@ function App() {
               {/* no match */}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-          </UserContext.Provider>
+          </UserProvider>
         </Layout>
       </Suspense>
     </Router>
