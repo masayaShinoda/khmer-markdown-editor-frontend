@@ -1,12 +1,16 @@
 import { FormEvent, FunctionComponent, useContext, useState, useEffect } from "react"
 import { UserContext } from "../../context/UserContext"
 import { Link, useNavigate, useLocation, Navigate } from "react-router-dom"
-import styles from "./Account.module.css"
 import LoadingSpinner from "../utils/LoadingSpinner"
+import ToastMessage from "../utils/ToastMessage"
+import login from "../../utils/login"
+import styles from "./Account.module.css"
 
 const LoginForm: FunctionComponent = () => {
     const navigate = useNavigate()
     const location = useLocation()
+
+    const router_message = location.state?.message? location.state.message : null
 
     const { user, setUser, setAccessToken } = useContext(UserContext)
 
@@ -35,7 +39,7 @@ const LoginForm: FunctionComponent = () => {
         }
     }, [username, password])
 
-    // react to change in toast message
+    // object to store possible toast message contents, and their corresponding class names
     const ToastMessages = {
         "routerMsg": {
             "message": routerMsg,
@@ -51,10 +55,14 @@ const LoginForm: FunctionComponent = () => {
         }
     }
 
+    // react to message passed from react-router-dom's useLocation()
     useEffect(() => {
-        setRouterMsg(location.state.message)
-    }, [location?.state?.message])
+        if(router_message) {
+            setRouterMsg(router_message)
+        }
+    }, [router_message])
 
+    // change activeToastMsg according to newest message state update
     useEffect(() => {
         if(routerMsg) {
             setActiveToastMsg("routerMsg")
@@ -68,8 +76,9 @@ const LoginForm: FunctionComponent = () => {
     }, [routerMsg, invalidCredentials, connectionError])
 
 
-    async function login(username: string, password: string) {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/token/`
+    
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault()
 
         // display loading spinner
         setSubmitBtnLoading(true)
@@ -81,50 +90,26 @@ const LoginForm: FunctionComponent = () => {
         setInvalidCredentials(false)
         setConnectionError(false)
 
-        try {
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "username": username,
-                    "password": password
-                })
-            })
-            // re-enable submit button & remove loading spinner
-            setSubmitBtnDisabled(false)
-            setSubmitBtnLoading(false)
-            return response.json()
-        } catch (err) {
-            setConnectionError(true)
-            // re-enable submit button & remove loading spinner
-            setSubmitBtnDisabled(false)
-            setSubmitBtnLoading(false)
-            return { "error": err }
-        }
-    }
-    
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault()
         login(username, password)
             .then(data => {
-                if(data["error"]) {
-                    setConnectionError(true)
+                // re-enable submit button & remove loading spinner
+                setSubmitBtnDisabled(false)
+                setSubmitBtnLoading(false)
 
+                if(data.error) {
+                    setConnectionError(true)
                     return
                 }
-
                 if(data.access) {
                     // hide any previous invalid credentials error message
                     setInvalidCredentials(false)
-                    // store user in context
+                    // set user in context
                     setUser({
                         username: username
                     })
                     // set auth token in context
                     setAccessToken(data.access)
-
+                    // store access token in localstorage
                     localStorage.setItem("access_token", data.access)
                     // redirect to homepage using react router
                     navigate('/')                    
@@ -189,23 +174,10 @@ const LoginForm: FunctionComponent = () => {
                     <div className={styles.messages_section}>
                         {
                             activeToastMsg ? 
-                                <span className={
-                                    `toast utils 
-                                        ${
-                                            activeToastMsg === "routerMsg" ? ToastMessages["routerMsg"]["util_classes"] 
-                                            : activeToastMsg === "invalidCredentials" ? ToastMessages["invalidCredentials"]["util_classes"] 
-                                            : activeToastMsg === "connectionError" ? ToastMessages["connectionError"]["util_classes"] 
-                                            : null
-                                        }
-                                    `
-                                }>
-                                    {
-                                        activeToastMsg === "routerMsg" ? ToastMessages["routerMsg"]["message"] 
-                                        : activeToastMsg === "invalidCredentials" ? ToastMessages["invalidCredentials"]["message"] 
-                                        : activeToastMsg === "connectionError" ? ToastMessages["connectionError"]["message"] 
-                                        : null
-                                    }
-                                </span>
+                                <ToastMessage 
+                                    activeToastMsg={activeToastMsg}
+                                    toastMessages={ToastMessages}
+                                />
                             : null
                         }
                     </div>

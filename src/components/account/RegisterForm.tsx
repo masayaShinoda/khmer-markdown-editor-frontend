@@ -1,18 +1,25 @@
-import { FormEvent, FunctionComponent, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { FormEvent, FunctionComponent, useContext, useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import LoadingSpinner from "../utils/LoadingSpinner"
+import { UserContext } from "../../context/UserContext"
 import register from "../../utils/register"
+import login from "../../utils/login"
 import styles from "./Account.module.css"
 
 const RegisterForm: FunctionComponent = () => {
+    const navigate = useNavigate()
+
+    const { setUser, setAccessToken } = useContext(UserContext)
 
     const [username, setUsername] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    
     const [inputsAreEmpty, setInputsAreEmpty] = useState<boolean>(true)
-    const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
+    const [connectionError, setConnectionError] = useState<boolean>(false)
+    
     const [submitBtnLoading, setSubmitBtnLoading] = useState<boolean>(false)
-
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
 
     // handle empty inputs
     useEffect(() => {
@@ -27,9 +34,49 @@ const RegisterForm: FunctionComponent = () => {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
+
+        // display loading spinner
+        setSubmitBtnLoading(true)
+
+        // disable button whilst requesting login
+        setSubmitBtnDisabled(true)
+
+        // hide error messages
+        setConnectionError(false)
+
         register(username, email, password)
             .then(data => {
-                console.log(data)
+                // re-enable submit button & remove loading spinner
+                setSubmitBtnDisabled(false)
+                setSubmitBtnLoading(false)
+
+                if(data.error) {
+                    setConnectionError(true)
+                    return
+                } 
+                if(data.success) {
+                    // upon successful registration, log user in
+                    login(username, password)
+                        .then(data => {
+                            if(data.error) {
+                                // upon error logging in, redirect to login page
+                                navigate("/login")
+                            }
+                            if(data.access) {
+                                // set user in context
+                                setUser({
+                                    username: username
+                                })
+                                // set auth token in context
+                                setAccessToken(data.access)
+                                // store access token in localstorage
+                                localStorage.setItem("access_token", data.access)
+                                // redirect to homepage using react router
+                                navigate('/')
+                            }
+                        })
+
+                }
             })
     }
 

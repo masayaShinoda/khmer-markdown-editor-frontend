@@ -90,9 +90,11 @@ const Dashboard: FunctionComponent = () => {
                         category={article.category}
                       />
             })
-          : <div style={{padding: `1rem 0`}}>
-            <Link to="/editor" className="utils type_scale_2">សរសេរអត្តបទថ្មី →</Link>
-          </div> 
+          : <tr style={{padding: `1rem 0`}}>
+              <td>
+                <Link to="/editor" className="utils type_scale_2">សរសេរអត្តបទថ្មី →</Link>
+              </td>
+          </tr> 
           }
         </tbody>
       </table>

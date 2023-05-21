@@ -22,9 +22,9 @@ html {
     --clr_grey_shade_e: #ececec;
     --clr_grey_shade_f: #f7f7f7;
 
-    --clr_success: #22bb33;
+    --clr_success: hsl(127, 69%, 43%);
     --clr_warning: hsl(35, 84%, 42%);
-    --clr_danger: #bb2124;
+    --clr_danger: hsl(359, 70%, 43%);
     --clr_success_translucent:  rgba(34,187,51,.075);
     --clr_warning_translucent: rgba(240,173,78,.075);
     --clr_danger_translucent: rgba(187,33,36,.075);
@@ -46,6 +46,12 @@ html {
 }
 html [data-theme="dark"] {
     --box_shadow_primary:  0 .5rem .5rem rgba(255,255,255,0.05);
+    --clr_success: hsl(127, 69%, 53%);
+    --clr_warning: hsl(35, 84%, 52%);
+    --clr_danger: hsl(359, 70%, 63%);
+    --clr_success_translucent: rgba(52, 218, 72, .05);
+    --clr_warning_translucent: rgba(235, 150, 30, .05);
+    --clr_danger_translucent: rgba(227, 95, 97, .05);
 }
 
 * {
