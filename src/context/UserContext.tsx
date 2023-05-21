@@ -14,14 +14,7 @@ interface UserProviderProps {
 export const UserProvider = (props: UserProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
     const [accessToken, setAccessToken] = useState<string | null>(null)
-
-
-    const contextData = {
-        user: user,
-        accessToken: accessToken,
-        setUser: setUser,
-        setAccessToken: setAccessToken,
-    }
+    const [contextData, setContextData] = useState({})
 
     // check localstorage for access token
     useEffect(() => {
@@ -51,6 +44,15 @@ export const UserProvider = (props: UserProviderProps) => {
                 })
         }
     }, [accessToken])
+
+    useEffect(() => {
+        setContextData({
+            user: user,
+            accessToken: accessToken,
+            setUser: setUser,
+            setAccessToken: setAccessToken,
+        })
+    }, [user, accessToken])
 
     return (
         <UserContext.Provider value={contextData}>

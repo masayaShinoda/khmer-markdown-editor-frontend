@@ -20,7 +20,17 @@
 }
 .btn_main:hover,
 .btn_main:focus {
+    text-decoration: none;
     filter: brightness(1.125);
+}
+a.btn_main:hover {
+  color: unset
+}
+.btn_main:focus {
+  border-color: var(--clr_primary_shade_a);
+}
+[data-theme="dark"] .btn_main:focus {
+  border-color: var(--clr_secondary);
 }
 .btn_main:active {
     transform: translateY(0.125rem);

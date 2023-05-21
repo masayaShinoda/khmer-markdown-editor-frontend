@@ -1,3 +1,10 @@
+.utils.type_scale_1 {font-size: var(--type_scale_1);}
+.utils.type_scale_2 {font-size: var(--type_scale_2);}
+.utils.type_scale_3 {font-size: var(--type_scale_3);}
+.utils.type_scale_4 {font-size: var(--type_scale_4);}
+.utils.type_scale_5 {font-size: var(--type_scale_5);}
+
+.utils.bg_none {background-color: none;}
 .utils.bg_clr_primary {background-color: var(--clr_primary)}
 .utils.bg_clr_primary_shade_a {background-color: var(--clr_primary_shade_a)}
 .utils.bg_clr_secondary {background-color: var(--clr_secondary)}

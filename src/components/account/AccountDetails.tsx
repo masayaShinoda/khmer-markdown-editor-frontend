@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext } from "react"
 import { UserContext } from "../../context/UserContext"
-import styles from "../../styles/Account.module.css"
+import styles from "./Account.module.css"
 import { useNavigate } from "react-router-dom"
 
 interface Props {
@@ -25,12 +25,12 @@ const AccountDetails: FunctionComponent<Props> = (props: Props) => {
     return <div>
         <h1>អំពីគណនី</h1>
         <div className={styles.account_details_container}>
-            <h5 title="ឈ្មោះគណនីប្រើសម្រាប់ចូលប្រើប្រាស់កម្មវិធី">ឈ្មោះប្រើប្រាស់៖ <i className="icon hint"></i></h5>
+            <h5 title="ឈ្មោះគណនីប្រើសម្រាប់ចូលប្រើប្រាស់កម្មវិធី">ឈ្មោះគណនី <i className="icon hint"></i></h5>
             <p>{props.user.username}</p>
         </div>
 
         <button
-            className="btn_main"
+            className="btn_main scale_2"
             aria-label="Sign out"
             onClick={handleSignOut}
         >

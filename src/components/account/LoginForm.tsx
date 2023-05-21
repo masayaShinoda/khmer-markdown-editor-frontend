@@ -1,7 +1,7 @@
 import { FormEvent, FunctionComponent, useContext, useState, useEffect } from "react"
 import { UserContext } from "../../context/UserContext"
-import { useNavigate, useLocation, Navigate } from "react-router-dom"
-import styles from "../../styles/Account.module.css"
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom"
+import styles from "./Account.module.css"
 import LoadingSpinner from "../utils/LoadingSpinner"
 
 const LoginForm: FunctionComponent = () => {
@@ -12,10 +12,14 @@ const LoginForm: FunctionComponent = () => {
 
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+
+    const [activeToastMsg, setActiveToastMsg] = useState<string | null>(null)
+
+    const [routerMsg, setRouterMsg] = useState(null)
     const [inputsAreEmpty, setInputsAreEmpty] = useState<boolean>(true)
     const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false)
     const [connectionError, setConnectionError] = useState<boolean>(false)
-    const [connectionErrorCode, setConnectionErrorCode] = useState<string>("")
+
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
     const [submitBtnLoading, setSubmitBtnLoading] = useState<boolean>(false)
 
@@ -30,6 +34,38 @@ const LoginForm: FunctionComponent = () => {
             setSubmitBtnDisabled(false)
         }
     }, [username, password])
+
+    // react to change in toast message
+    const ToastMessages = {
+        "routerMsg": {
+            "message": routerMsg,
+            "util_classes": "clr_warning bg_clr_warning_translucent",
+        },
+        "invalidCredentials": {
+            "message": "សូមពិនិត្យមើលឈ្មោះគណនីឬពាក្យសម្ងាត់របស់អ្នកម្តងទៀត។",
+            "util_classes": "clr_danger bg_clr_danger_translucent",
+        },
+        "connectionError": {
+            "message": "កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។",
+            "util_classes": "clr_danger bg_clr_danger_translucent",
+        }
+    }
+
+    useEffect(() => {
+        setRouterMsg(location.state.message)
+    }, [location?.state?.message])
+
+    useEffect(() => {
+        if(routerMsg) {
+            setActiveToastMsg("routerMsg")
+        }
+        if(invalidCredentials) {
+            setActiveToastMsg("invalidCredentials")
+        }
+        if(connectionError) {
+            setActiveToastMsg("connectionError")
+        }
+    }, [routerMsg, invalidCredentials, connectionError])
 
 
     async function login(username: string, password: string) {
@@ -62,7 +98,6 @@ const LoginForm: FunctionComponent = () => {
             return response.json()
         } catch (err) {
             setConnectionError(true)
-            setConnectionErrorCode(JSON.stringify(err))
             // re-enable submit button & remove loading spinner
             setSubmitBtnDisabled(false)
             setSubmitBtnLoading(false)
@@ -76,7 +111,6 @@ const LoginForm: FunctionComponent = () => {
             .then(data => {
                 if(data["error"]) {
                     setConnectionError(true)
-                    setConnectionErrorCode(data["error"])
 
                     return
                 }
@@ -106,8 +140,11 @@ const LoginForm: FunctionComponent = () => {
     if(user !== null) {
         return <Navigate to={'/'} />
     } else {
-        return <div>
+        return <>
             <h2>ចូលគណនី</h2>
+            <div style={{marginBottom: `1rem`}}>
+                <Link to="/register" className="utils type_scale_2">បង្កើតគណនីថ្មី →</Link>
+            </div>
             <div className={styles.form_wrapper}>
                 <form onSubmit={handleSubmit}>
                     <div className="input_wrapper">
@@ -151,28 +188,30 @@ const LoginForm: FunctionComponent = () => {
                     </div>
                     <div className={styles.messages_section}>
                         {
-                            invalidCredentials ? 
-                                <span className="toast utils clr_danger bg_clr_danger_translucent">
-                                    សូមពិនិត្យមើលឈ្មោះគណនីឬពាក្យសម្ងាត់របស់អ្នកម្តងទៀត។
+                            activeToastMsg ? 
+                                <span className={
+                                    `toast utils 
+                                        ${
+                                            activeToastMsg === "routerMsg" ? ToastMessages["routerMsg"]["util_classes"] 
+                                            : activeToastMsg === "invalidCredentials" ? ToastMessages["invalidCredentials"]["util_classes"] 
+                                            : activeToastMsg === "connectionError" ? ToastMessages["connectionError"]["util_classes"] 
+                                            : null
+                                        }
+                                    `
+                                }>
+                                    {
+                                        activeToastMsg === "routerMsg" ? ToastMessages["routerMsg"]["message"] 
+                                        : activeToastMsg === "invalidCredentials" ? ToastMessages["invalidCredentials"]["message"] 
+                                        : activeToastMsg === "connectionError" ? ToastMessages["connectionError"]["message"] 
+                                        : null
+                                    }
                                 </span>
                             : null
                         }
-                        {
-                            connectionError ? 
-                                <span className="toast utils clr_danger bg_clr_danger_translucent">
-                                    កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។ {connectionErrorCode ? connectionError : null}
-                                </span>
-                            : null
-                        }
-                        {location?.state?.message? 
-                            <span className="toast utils clr_warning bg_clr_warning_translucent">
-                                {location.state.message}
-                            </span>
-                        : null}
                     </div>
                 </form>
             </div>
-        </div>
+        </>
     }
 }
 

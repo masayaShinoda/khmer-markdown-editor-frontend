@@ -1,8 +1,8 @@
 html {
     /* type scaling */
-    --type_scale_5: 3.052rem;
-    --type_scale_4: 2.441rem;
-    --type_scale_3: 1.563rem;
+    --type_scale_5: 1.802rem;
+    --type_scale_4: 1.602rem;
+    --type_scale_3: 1.424rem;
     --type_scale_2: 1.25rem;
     --type_scale_1: 1rem;
 
@@ -10,14 +10,14 @@ html {
 }
 html[lang="km"] {
     /* bigger font for khmer site */
-    font-size: 110%;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 48em) {
     html {
-        --type_scale_5: calc(3.052rem * 0.95);
-        --type_scale_4: calc(2.441rem * 0.95);
-        --type_scale_3: calc(1.563rem * 0.95);
+        --type_scale_5: calc(1.802rem * 0.95);
+        --type_scale_4: calc(1.602rem * 0.95);
+        --type_scale_3: calc(1.424rem * 0.95);
         --type_scale_2: calc(1.25rem * 0.95);
         --type_scale_1: calc(1rem * 0.95);
     }
@@ -30,7 +30,7 @@ body {
   
 p {
     margin-bottom: 1rem;
-    font-size: 1rem;
+    font-size: var(--type_scale_1);
 }
 
 h1, h2, h3, h4, h5 {
@@ -42,15 +42,15 @@ h1, h2, h3, h4, h5 {
 
 h1 {
     margin-top: 0;
-    font-size: 1.802rem;
+    font-size: var(--type_scale_5);
 }
 
-h2 {font-size: 1.602rem;}
+h2 {font-size: var(--type_scale_4)}
 
-h3 {font-size: 1.424rem;}
+h3 {font-size: var(--type_scale_3);}
 
-h4 {font-size: 1.266rem;}
+h4 {font-size: var(--type_scale_2);}
 
-h5 {font-size: 1.125rem;}
+h5 {font-size: calc(var(--type_scale_1) * 1.125);}
 
-small, .text_small {font-size: 0.889rem;}
+small, .text_small {font-size: calc(var(--type_scale_1) * 0.95);}

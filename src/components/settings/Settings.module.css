@@ -1,0 +1,20 @@
+.settings_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+    
+    width: 100%;
+    max-width: 40em;
+}
+
+.grid_item {
+    padding: .75rem;
+    font-size: var(--type_scale_2);
+    border-radius: .5rem;
+}
+
+.grid_item .icon {
+    width: 1.25rem; height: 1.25rem;
+    margin-right: .5rem;
+    filter: none;
+}
