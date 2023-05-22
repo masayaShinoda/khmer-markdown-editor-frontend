@@ -48,10 +48,16 @@
 }
 .articles_table .row td {
     padding: .5rem 0;
+    min-width: 20%;
 }
 .articles_table .row td:first-of-type {
     padding-left: .5rem;
-    min-width: 35%;
+    min-width: 40%;
+    /* outline: 1px solid red; */
+}
+.articles_table .row td:nth-of-type(2) {
+    min-width: 20%;
+    /* outline: 1px solid green; */
 }
 .articles_table .row td:last-of-type {
     padding-right: .5rem;
@@ -60,3 +66,9 @@
 .articles_table .td_date {
     font-size: calc(var(--type_scale_1) * 0.9);
 }
+
+
+/* @media screen and (max-width: 48em) {
+    .articles_table {
+    }
+} */

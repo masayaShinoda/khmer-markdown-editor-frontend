@@ -53,9 +53,15 @@ const Navbar: FunctionComponent = () => {
         <nav className={styles.nav}>
             {nav_items.map(item => {
                 return (
-                    <Link to={item.path} className={`${styles.nav_link} ${location.pathname === item.path ? styles.active : null}`} key={item.name}>
+                    <Link 
+                        to={item.path} 
+                        className={`${styles.nav_link} ${location.pathname === item.path ? styles.active : null}`} 
+                        key={item.name}
+                        aria-label={item.name}
+                        title={item.name}
+                    >
                         <i className={`${styles.icon} icon ${item.icon_class}`}></i>
-                        {item.name}
+                        <span>{item.name}</span>
                     </Link>
                 )
             })}

@@ -13,7 +13,32 @@
     color: var(--clr_light);
     background-color: var(--clr_dark);
 }
+@media screen and (max-width: 64em) {
+    .layout {
+        grid-template-columns: 5rem auto;
+    }
+}
+@media screen and (max-width: 40em) {
+    .layout {
+        grid-template-columns: none;
+        grid-template-rows: 5rem auto;
+    }
+}
+
 
 .main {
     padding: 2.5rem 2.5rem;
+    /* overflow-x: hidden; */
+}
+@media screen and (max-width: 64em) {
+    .main {
+        padding: 2.5rem 1.75rem;
+    }
+}
+@media screen and (max-width: 40em) {
+    .main {
+        padding: 2.5rem 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
 }
