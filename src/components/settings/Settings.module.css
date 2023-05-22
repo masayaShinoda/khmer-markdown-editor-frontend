@@ -6,6 +6,12 @@
     width: 100%;
     max-width: 40em;
 }
+@media screen and (max-width: 40em) {
+    .settings_grid {
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+    }
+}
 
 .grid_item {
     padding: .75rem;

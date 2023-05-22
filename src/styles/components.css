@@ -92,7 +92,12 @@ a.btn_main:hover {
 	color: #fff;
 	border-color: var(--clr_grey_shade_c);
 	background-color: var(--clr_grey_shade_a);
-} 
+}
+@media screen and (max-width: 40em) {
+  .input_text {
+    width: 100%;
+  }
+}
 .input_text:focus {
     border-color: var(--clr_primary_shade_a);
 }
