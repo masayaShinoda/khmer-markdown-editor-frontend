@@ -1,4 +1,4 @@
-import { ReactNode, FunctionComponent, useContext, useEffect, useState } from "react"
+import { ReactNode, FunctionComponent, useContext } from "react"
 import { UserContext } from "../context/UserContext"
 import { Navigate } from "react-router-dom"
 

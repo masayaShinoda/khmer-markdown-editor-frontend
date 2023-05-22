@@ -1,7 +1,8 @@
 import { FormEvent, FunctionComponent, useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import LoadingSpinner from "../utils/LoadingSpinner"
 import { UserContext } from "../../context/UserContext"
+import ToastMessage from "../utils/ToastMessage"
+import LoadingSpinner from "../utils/LoadingSpinner"
 import register from "../../utils/register"
 import login from "../../utils/login"
 import styles from "./Account.module.css"
@@ -15,6 +16,8 @@ const RegisterForm: FunctionComponent = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     
+    const [activeToastMsg, setActiveToastMsg] = useState<string | null>(null)
+
     const [inputsAreEmpty, setInputsAreEmpty] = useState<boolean>(true)
     const [connectionError, setConnectionError] = useState<boolean>(false)
     
@@ -31,6 +34,21 @@ const RegisterForm: FunctionComponent = () => {
             setSubmitBtnDisabled(false)
         }
     }, [username, email, password])
+
+    // object to store possible toast message contents, and their corresponding class names
+    const ToastMessages = {
+        "connectionError": {
+            "message": "កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។",
+            "util_classes": "clr_danger bg_clr_danger_translucent",
+        }
+    }
+
+    // change activeToastMsg according to newest message state update
+    useEffect(() => {
+        if(connectionError) {
+            setActiveToastMsg("connectionError")
+        }
+    }, [connectionError])
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
@@ -143,6 +161,14 @@ const RegisterForm: FunctionComponent = () => {
                     </button>
                 </div>
                 <div className={styles.messages_section}>
+                {
+                    activeToastMsg ? 
+                        <ToastMessage 
+                            activeToastMsg={activeToastMsg}
+                            toastMessages={ToastMessages}
+                        />
+                    : null
+                }
                 </div>
             </form>
         </div>
