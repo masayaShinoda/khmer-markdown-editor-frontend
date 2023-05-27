@@ -8,6 +8,7 @@ import Layout from "./components/Layout"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Dashboard from "./components/dashboard/Dashboard"
 import Editor from "./components/editor/Editor"
+import EditorBlank from "./components/editor/EditorBlank"
 import Account from "./components/account/Account"
 import LoginForm from "./components/account/LoginForm"
 import RegisterForm from "./components/account/RegisterForm"
@@ -33,10 +34,17 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
-              <Route path="editor" 
+              <Route path="editor/:slug" 
                 element={
                   <ProtectedRoute>
                     <Editor />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="editor/new" 
+                element={
+                  <ProtectedRoute>
+                    <EditorBlank />
                   </ProtectedRoute>
                 } 
               />

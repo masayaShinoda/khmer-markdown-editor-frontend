@@ -1,9 +1,11 @@
 .dashboard_container {
+    background-color: #fff;
     border-radius: .5rem;
     border: 1px solid var(--clr_grey_shade_d);
     padding: .5rem;
 }
 [data-theme="dark"] .dashboard_container {
+    background-color: var(--clr_dark_shade_a);
     border-color: var(--clr_grey_shade_a);
 }
 

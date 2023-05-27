@@ -1,5 +1,5 @@
 export default async function login(username: string, password: string) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/token/`
+    const url = `${import.meta.env.VITE_BACKEND_URL}/token/`
 
     try {
         const response = await fetch(url, {

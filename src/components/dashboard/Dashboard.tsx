@@ -15,7 +15,7 @@ const Dashboard: FunctionComponent = () => {
 
   interface Article {
     key: number,
-    id: number,
+    slug: string,
     title: string,
     category: string,
     updated_at: string,
@@ -25,7 +25,7 @@ const Dashboard: FunctionComponent = () => {
   const [articles, setArticles] = useState<Array<Article>>([])
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/articles`, 
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/articles/`, 
       {
         method: "GET",
         headers: {
@@ -46,7 +46,7 @@ const Dashboard: FunctionComponent = () => {
           setArticles(articles.map((article: Article, index: number) => {
               return {
                 key: index,
-                id: article.id,
+                slug: article.slug,
                 title: article.title,
                 category: article.category,
                 updated_at: article.updated_at,
@@ -74,7 +74,7 @@ const Dashboard: FunctionComponent = () => {
         <thead>
           <tr>
             <td>ចំណងជើង</td>
-            <td>ប្រភេទ</td>
+            <td>ប្រភេទអត្តបទ</td>
             <td>កែប្រែចុងក្រោយ</td>
             <td>បង្កើតឡើង</td>
           </tr>
@@ -84,6 +84,7 @@ const Dashboard: FunctionComponent = () => {
             articles.map((article, i) => {
               return <Row 
                         key={i}
+                        slug={article.slug}
                         title={article.title} 
                         updated_at={article.updated_at} 
                         created_at={article.created_at}
@@ -92,7 +93,7 @@ const Dashboard: FunctionComponent = () => {
             })
           : <tr style={{padding: `1rem 0`}}>
               <td>
-                <Link to="/editor" className="utils type_scale_2">សរសេរអត្តបទថ្មី →</Link>
+                <Link to="/editor/new" className="utils type_scale_2">សរសេរអត្តបទថ្មី →</Link>
               </td>
           </tr> 
           }

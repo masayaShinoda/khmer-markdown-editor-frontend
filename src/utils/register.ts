@@ -1,5 +1,5 @@
 export default async function register(username: string, email: string, password: string) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/register/`
+    const url = `${import.meta.env.VITE_BACKEND_URL}/register/`
 
     try {
         const response = await fetch(url, {

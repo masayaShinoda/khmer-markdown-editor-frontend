@@ -1,5 +1,5 @@
 export default async function check_token(token: string) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/check-token/`
+    const url = `${import.meta.env.VITE_BACKEND_URL}/check-token/`
 
     try {
         const response = await fetch(url, {

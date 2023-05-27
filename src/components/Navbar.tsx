@@ -18,7 +18,7 @@ const Navbar: FunctionComponent = () => {
             name: "ទំព័រដើម",
         },
         {
-            path: "/editor",
+            path: "/editor/new",
             icon_class: "add_document",
             name: "អត្ថបទថ្មី",
         },
