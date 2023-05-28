@@ -1,25 +1,38 @@
-import { FunctionComponent, useEffect, useContext, useState } from "react"
+import { FunctionComponent, useEffect, useContext, useState, FormEvent } from "react"
 import { useParams } from "react-router-dom"
 import { UserContext } from "../../context/UserContext"
 import LoadingSpinner from "../utils/LoadingSpinner"
 import EditorHeader from "./EditorHeader"
 import EditorContent from "./EditorContent"
-import BackButton from "../utils/BackButton"
 import styles from "./Editor.module.css"
-
-interface Article {
-    title: string,
-    category: string,
-    content: string,
-    created_at: string,
-    updated_at: string,
-}
 
 const Editor: FunctionComponent = () => {
     const { slug } = useParams()
     const { accessToken } = useContext(UserContext)
     
-    const [article, setArticle] = useState<Article | null>(null)
+    const [title, setTitle] = useState<string>("")
+    const [category, setCategory] = useState<string>("")
+    const [content, setContent] = useState<string>("")
+    const [createdAt, setCreatedAt] = useState<string>("")
+    const [updatedAt, setUpdatedAt] = useState<string>("")
+    
+
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault()
+    }
+
+    function handleTitle(title: string) {
+        setTitle(title)
+        return void 0
+    }
+    function handleCategory(category: string) {
+        setCategory(category)
+        return void 0
+    }
+    function handleContent(content: string) {
+        setContent(content)
+        return void 0
+    }
 
     async function get_article(slug: string | undefined, token: string,) {
         const url = `${import.meta.env.VITE_BACKEND_URL}/article/${slug}/`
@@ -40,33 +53,40 @@ const Editor: FunctionComponent = () => {
     useEffect(() => {
         get_article(slug, accessToken)
             .then(data => {
-                setArticle({
-                    title: data.title,
-                    category: data.category,
-                    content: data.content,
-                    created_at: data.created_at,
-                    updated_at: data.updated_at,
-                })
+                setTitle(data.title)
+                setCategory(data.category_name ? data.category_name : "")
+                setContent(data.content)
+                setCreatedAt(data.created_at)
+                setUpdatedAt(data.updated_at)
             })
+
     }, [slug, accessToken])
 
 
     return (
         <>
-            {article ?
+            {title && content ?
                 <div className={styles.editor_wrapper}>
-                    <nav style={{marginBottom: `1rem`}}>
-                        <BackButton />
-                    </nav>
-                    <EditorHeader 
-                        title={article.title} 
-                        category={article.category} 
-                        created_at={article.created_at} 
-                        updated_at={article.updated_at} 
-                    />
-                    <EditorContent 
-                        content={article.content}
-                    />
+                    <form 
+                        id="editor_form"
+                        name="editor_form"
+                        onSubmit={handleSubmit}
+                    >
+                        <section className={styles.editor_top_section}>
+                            <EditorHeader 
+                                title={title}
+                                category_name={category}
+                                created_at={createdAt}
+                                updated_at={updatedAt}
+                                handleTitle={handleTitle}
+                                handleCategory={handleCategory}
+                            />
+                        </section>
+                        <EditorContent 
+                            content={content}
+                            handleContent={handleContent}
+                        />
+                    </form>
                 </div>
             : <>
                 <LoadingSpinner />

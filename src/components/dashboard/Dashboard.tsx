@@ -17,7 +17,7 @@ const Dashboard: FunctionComponent = () => {
     key: number,
     slug: string,
     title: string,
-    category: string,
+    category_name: string,
     updated_at: string,
     created_at: string,
   }
@@ -48,7 +48,7 @@ const Dashboard: FunctionComponent = () => {
                 key: index,
                 slug: article.slug,
                 title: article.title,
-                category: article.category,
+                category_name: article.category_name,
                 updated_at: article.updated_at,
                 created_at: article.created_at,
               }
@@ -88,7 +88,7 @@ const Dashboard: FunctionComponent = () => {
                         title={article.title} 
                         updated_at={article.updated_at} 
                         created_at={article.created_at}
-                        category={article.category}
+                        category_name={article.category_name}
                       />
             })
           : <tr style={{padding: `1rem 0`}}>

@@ -1,35 +1,68 @@
-import { FunctionComponent, ChangeEvent, useState } from "react"
+import { FunctionComponent, ChangeEvent } from "react"
+import BackButton from "../utils/BackButton"
 import styles from "./Editor.module.css"
 
 interface ArticleMetadata {
     title: string,
-    category?: string,
+    category_name: string,
     created_at?: string,
     updated_at?: string,
+    handleTitle: (title: string) => void,
+    handleCategory: (category: string) => void,
 }
 
 const EditorHeader: FunctionComponent<ArticleMetadata> = (props: ArticleMetadata) => {
-    const category_from_props: string = props.category ? props.category : ""
+    const category_from_props: string = props.category_name ? props.category_name : ""
 
-    const [titleInputValue, setTitleInputValue] = useState<string>(props.title)
-    const [categoryInputValue, setCategoryInputValue] = useState<string>(category_from_props)
 
     function handleTitleInput(e: ChangeEvent<HTMLInputElement>) {
-        setTitleInputValue(e.target.value)
+        props.handleTitle?.(e.target.value)
     }
+    
     function handleCategoryInput(e: ChangeEvent<HTMLInputElement>) {
-        setCategoryInputValue(e.target.value)
+        props.handleCategory?.(e.target.value)
     }
 
     return <section className={styles.editor_header}>
-        <input 
-            type="text" 
-            name="title" 
-            value={titleInputValue} 
-            // placeholder={props.title}
-            onChange={handleTitleInput}
-            className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
-        />
+        <div className={styles.top_section}>
+            <nav style={{marginRight: `1rem`}}>
+                <BackButton />
+            </nav>
+            <input 
+                type="text" 
+                name="title" 
+                value={props.title} 
+                placeholder="[ចំណងជើង]"
+                onChange={handleTitleInput}
+                className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
+            />
+            <button 
+                id="submit_editor_form"
+                type="submit"
+                aria-label="Save progress"
+                className="btn_main"
+                style={{
+                    marginLeft: `1rem`
+                }}
+            >
+                <i className="icon save"></i>
+                <span>
+                    រក្សាទុក
+                </span>
+            </button>
+            <button 
+                aria-label="Delete"
+                className="btn_main"
+                style={{
+                    marginLeft: `.5rem`
+                }}
+            >
+                <i className="icon trash"></i>
+                <span>
+                    លុប
+                </span>
+            </button>
+        </div>
         <div className={styles.date_section}>
             {props.created_at ?
                 <span>
@@ -47,8 +80,8 @@ const EditorHeader: FunctionComponent<ArticleMetadata> = (props: ArticleMetadata
                     <input 
                         type="text" 
                         name="category"
-                        placeholder={categoryInputValue.length > 0 ? categoryInputValue : "មិនកំណត់"}
-                        value={categoryInputValue}
+                        placeholder={category_from_props.length > 0 ? category_from_props : "មិនកំណត់"}
+                        value={props.category_name}
                         onChange={handleCategoryInput}
                         className={`${styles.editor_input_text}`}
                     />

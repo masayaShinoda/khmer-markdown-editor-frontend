@@ -18,9 +18,9 @@ const BackButton: FunctionComponent = () => {
         <button 
             onClick={handleGoBack} 
             aria-label="Back to previous page"
-            className="btn_main"
+            className="btn_main btn_main__icon_btn"
         >
-            ← ទំព័រមុន
+            <i className="icon arrow_left"></i>
         </button>
     )
 }

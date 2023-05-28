@@ -5,7 +5,7 @@ import styles from "./Dashboard.module.css"
 interface Props {
     slug: string,
     title: string,
-    category: string,
+    category_name: string,
     updated_at: string,
     created_at: string,
 }
@@ -16,27 +16,50 @@ const Row: FunctionComponent<Props> = (props: Props) => {
     function handleTableRowLink(slug: string) {
         navigate(`/editor/${slug}`)
     }
+    function handleTableRowKeyDown(e: KeyboardEvent, slug: string) {
+        if(e.key === "Enter") {
+            handleTableRowLink(slug)
+        }
+    }
 
     return <>
         <tr 
             className={styles.row} 
+            tabIndex={0}
             data-href={`/editor/${props.slug}`}
             onClick={() => handleTableRowLink(props.slug)}
+            onKeyDown={(e) => handleTableRowKeyDown(e, props.slug)}
         >
                 <td>
                     <span>{props.title}</span>
                 </td>
                 <td>
-                    <span>{props.category ? props.category : "មិនកំណត់"}</span>
+                    <span>{props.category_name ? props.category_name : "មិនកំណត់"}</span>
                 </td>
                 <td className={styles.td_date}>
                     <span>
-                        <time>{new Date(props.updated_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {(new Date(props.updated_at)).toLocaleDateString('km')}</time>
+                        <time>
+                            <span>
+                                {new Date(props.updated_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                            </span>
+                            <br></br>
+                            <span>
+                                {(new Date(props.updated_at)).toLocaleDateString('km')}
+                            </span>
+                        </time>
                     </span>
                 </td>
                 <td className={styles.td_date}>
                     <span>
-                        <time>{new Date(props.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {(new Date(props.created_at)).toLocaleDateString('km')}</time>
+                        <time>
+                            <span>
+                                {new Date(props.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                            </span>
+                            <br></br>
+                            <span>
+                                {(new Date(props.created_at)).toLocaleDateString('km')}
+                            </span>
+                        </time>
                     </span>
                 </td>
         </tr>
