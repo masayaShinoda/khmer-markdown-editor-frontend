@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react"
+import { KeyboardEvent, FunctionComponent } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./Dashboard.module.css"
 
@@ -16,7 +16,7 @@ const Row: FunctionComponent<Props> = (props: Props) => {
     function handleTableRowLink(slug: string) {
         navigate(`/editor/${slug}`)
     }
-    function handleTableRowKeyDown(e: KeyboardEvent, slug: string) {
+    function handleTableRowKeyDown<T extends HTMLTableRowElement>(e: KeyboardEvent<T>, slug: string) {
         if(e.key === "Enter") {
             handleTableRowLink(slug)
         }
