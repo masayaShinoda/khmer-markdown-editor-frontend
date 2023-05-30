@@ -1,17 +1,18 @@
-export default async function save_article(
+export default async function update_article(
     token: string, 
+    article_id: string,
     slug: string,
     title: string, 
     category: string, 
     content: string
 ) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/article/`
+    const url = `${import.meta.env.VITE_BACKEND_URL}/article/${article_id}/`
 
     let response
 
     try {
         response = await fetch(url, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`

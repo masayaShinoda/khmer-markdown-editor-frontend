@@ -1,5 +1,4 @@
 import { ChangeEvent, FunctionComponent } from "react"
-// import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import styles from "./Editor.module.css"
 
 interface ArticleContentProps {
@@ -14,8 +13,8 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
 
     return <section className={styles.editor_content}>
         <textarea 
+            required
             name="content" 
-            // defaultValue={props.content.length > 0 ? props.content : ""}
             value={props.content}
             onChange={handleContentInput}
             placeholder={props.content.length > 0 ? "" : "[សរសេរអត្តបទនៅទីនេះ]"}

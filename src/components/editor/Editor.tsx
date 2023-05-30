@@ -1,15 +1,21 @@
 import { FunctionComponent, useEffect, useContext, useState, FormEvent } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { UserContext } from "../../context/UserContext"
 import LoadingSpinner from "../utils/LoadingSpinner"
 import EditorHeader from "./EditorHeader"
 import EditorContent from "./EditorContent"
+import slugify from "../../utils/slugify"
+import update_article from "../../utils/update_article"
 import styles from "./Editor.module.css"
 
 const Editor: FunctionComponent = () => {
-    const { slug } = useParams()
+    const navigate = useNavigate()
+
+    const slugParam = useParams().slug || ""
     const { accessToken } = useContext(UserContext)
     
+    const [articleId, setArticleId] = useState<string>("")
+    const [slug, setSlug] = useState<string>(slugParam)
     const [title, setTitle] = useState<string>("")
     const [category, setCategory] = useState<string>("")
     const [content, setContent] = useState<string>("")
@@ -19,10 +25,24 @@ const Editor: FunctionComponent = () => {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
+        
+        update_article(accessToken, articleId, slug, title, category, content)
+            .then(data => {
+                if(data.error) {
+                    console.log(data.error)
+                    return
+                }
+                if(data) {
+                    // console.log(data.updated_article)
+                    navigate(`/editor/slug/${data.updated_article.slug}/`) // navigate to new slug
+                    return
+                }
+            })
     }
 
     function handleTitle(title: string) {
         setTitle(title)
+        setSlug(slugify(title))
         return void 0
     }
     function handleCategory(category: string) {
@@ -34,8 +54,8 @@ const Editor: FunctionComponent = () => {
         return void 0
     }
 
-    async function get_article(slug: string | undefined, token: string,) {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/article/${slug}/`
+    async function get_article(slug: string, token: string,) {
+        const url = `${import.meta.env.VITE_BACKEND_URL}/article/slug/${slug}/`
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -51,8 +71,10 @@ const Editor: FunctionComponent = () => {
     }
 
     useEffect(() => {
-        get_article(slug, accessToken)
+        // using slugParam instead of slug to prevent re-fetching article every time slug updates
+        get_article(slugParam, accessToken)
             .then(data => {
+                setArticleId(data.id)
                 setTitle(data.title)
                 setCategory(data.category_name ? data.category_name : "")
                 setContent(data.content)
@@ -60,7 +82,7 @@ const Editor: FunctionComponent = () => {
                 setUpdatedAt(data.updated_at)
             })
 
-    }, [slug, accessToken])
+    }, [slugParam, accessToken])
 
 
     return (
@@ -74,12 +96,14 @@ const Editor: FunctionComponent = () => {
                     >
                         <section className={styles.editor_top_section}>
                             <EditorHeader 
+                                slug={slug}
                                 title={title}
                                 category_name={category}
                                 created_at={createdAt}
                                 updated_at={updatedAt}
                                 handleTitle={handleTitle}
                                 handleCategory={handleCategory}
+                                access_token={accessToken}
                             />
                         </section>
                         <EditorContent 

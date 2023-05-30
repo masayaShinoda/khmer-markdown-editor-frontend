@@ -34,7 +34,7 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
-              <Route path="editor/:slug" 
+              <Route path="editor/slug/:slug" 
                 element={
                   <ProtectedRoute>
                     <Editor />

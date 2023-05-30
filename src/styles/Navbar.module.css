@@ -94,14 +94,20 @@
     .navbar {
         padding: 2.5rem .25rem;
     }
+    .logo_container {
+        padding: 0 .25rem;
+    }
     .nav {
         align-items: center;
     }
     .nav .nav_link {
         justify-content: center;
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 3rem;
+        height: 3rem;
         padding: .5rem;
+    }
+    .nav .nav_link:not(:last-of-type) {
+        margin-bottom: .75rem;
     }
     .nav .nav_link .icon {
         margin: 0;

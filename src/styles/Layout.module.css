@@ -15,7 +15,7 @@
 }
 @media screen and (max-width: 64em) {
     .layout {
-        grid-template-columns: 5rem auto;
+        grid-template-columns: 3.75rem auto;
     }
 }
 @media screen and (max-width: 40em) {

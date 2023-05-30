@@ -1,26 +1,20 @@
-export default async function save_article(
+export default async function delete_article(
     token: string, 
     slug: string,
-    title: string, 
-    category: string, 
-    content: string
 ) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/article/`
+    const url = `${import.meta.env.VITE_BACKEND_URL}/article/${slug}/`
 
     let response
 
     try {
         response = await fetch(url, {
-            method: "POST",
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 "slug": slug,
-                "title": title,
-                "category": category,
-                "content": content,
             })
         })
     } catch (err) {

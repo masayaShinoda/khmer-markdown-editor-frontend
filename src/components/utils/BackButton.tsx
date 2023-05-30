@@ -1,16 +1,24 @@
 import { FunctionComponent } from "react"
 import { useNavigate } from "react-router-dom"
 
-const BackButton: FunctionComponent = () => {
+interface BackBtnProps {
+    back_to?: string
+}
+
+const BackButton: FunctionComponent<BackBtnProps> = (props: BackBtnProps) => {
     const navigate = useNavigate()
 
     function handleGoBack() {
-        const hasPreviousPage = window.history.length > 1
-
-        if (hasPreviousPage) {
-            navigate(-1)
-        } else {
+        if(props.back_to === "/") {
             navigate("/")
+        } else {
+            const hasPreviousPage = window.history.length > 1
+    
+            if (hasPreviousPage) {
+                navigate(-1)
+            } else {
+                navigate("/")
+            }
         }
     }
 

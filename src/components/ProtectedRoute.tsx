@@ -7,9 +7,9 @@ interface ProtectedRouteProps {
   }
 
 const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
-    const { user } = useContext(UserContext)
+    const { user, accessToken } = useContext(UserContext)
     return (
-        user ? <>{props.children}</> : <Navigate to={"/login"} state={{message: "សូមចូលទៅកាន់គណនីលោកអ្នកដើម្បីបន្ត។"}} />
+        user && accessToken ? <>{props.children}</> : <Navigate to={"/login"} state={{message: "សូមចូលទៅកាន់គណនីលោកអ្នកដើម្បីបន្ត។"}} />
     )
 }
 
