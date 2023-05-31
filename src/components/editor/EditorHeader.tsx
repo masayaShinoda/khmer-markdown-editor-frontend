@@ -5,6 +5,8 @@ import delete_article from "../../utils/delete_article"
 import styles from "./Editor.module.css"
 
 interface EditorHeaderProps {
+    is_blank_page?: boolean,
+    article_id: string,
     slug: string,
     title: string,
     category_name: string,
@@ -23,19 +25,19 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
     function handleTitleInput(e: ChangeEvent<HTMLInputElement>) {
         props.handleTitle?.(e.target.value)
     }
-    
+
     function handleCategoryInput(e: ChangeEvent<HTMLInputElement>) {
         props.handleCategory?.(e.target.value)
     }
 
     function handleDeleteButton() {
-        delete_article(props.access_token, props.slug)
+        delete_article(props.access_token, props.article_id)
             .then(data => {
-                if(data.error) {
+                if (data.error) {
                     console.log(data.error)
                     return
                 }
-                if(data) {
+                if (data.success) {
                     console.log(data)
                     return navigate("/")
                 }
@@ -44,19 +46,19 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
 
     return <section className={styles.editor_header}>
         <div className={styles.top_section}>
-            <nav style={{marginRight: `1rem`}}>
+            <nav style={{ marginRight: `1rem` }}>
                 <BackButton back_to="/" />
             </nav>
-            <input 
+            <input
                 required
-                type="text" 
-                name="title" 
-                value={props.title} 
+                type="text"
+                name="title"
+                value={props.title}
                 placeholder="[ចំណងជើង]"
                 onChange={handleTitleInput}
                 className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
             />
-            <button 
+            <button
                 id="submit_editor_form"
                 type="submit"
                 aria-label="Save progress"
@@ -68,36 +70,41 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                 <i className="icon save"></i>
                 <span>រក្សា&#8288;ទុក</span>
             </button>
-            <button 
-                onClick={handleDeleteButton}
-                aria-label="Delete"
-                className="btn_main"
-                style={{
-                    marginLeft: `.5rem`
-                }}
-            >
-                <i className="icon trash"></i>
-                <span>
-                    លុប
-                </span>
-            </button>
+            {
+                !props.is_blank_page ?
+                    <button
+                        onClick={handleDeleteButton}
+                        type="button"
+                        aria-label="Delete"
+                        className="btn_main"
+                        style={{
+                            marginLeft: `.5rem`
+                        }}
+                    >
+                        <i className="icon trash"></i>
+                        <span>
+                            លុប
+                        </span>
+                    </button>
+                    : null
+            }
         </div>
         <div className={styles.date_section}>
             {props.created_at ?
                 <span>
                     <span className={styles.date_label}>
-                        បង្កើតឡើង៖ 
+                        បង្កើតឡើង៖
                     </span>
-                    <time>{(new Date(props.created_at)).toLocaleDateString('km')} - {new Date(props.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</time>
+                    <time>{(new Date(props.created_at)).toLocaleDateString('km')} - {new Date(props.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
                 </span>
-            : null}
+                : null}
             <span>
                 <span className={styles.date_label}>
-                    ប្រភេទអត្តបទ៖ 
+                    ប្រភេទអត្តបទ៖
                 </span>
                 <span>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="category"
                         placeholder={category_from_props.length > 0 ? category_from_props : "មិនកំណត់"}
                         value={props.category_name}

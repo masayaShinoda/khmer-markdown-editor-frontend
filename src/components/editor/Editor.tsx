@@ -6,6 +6,7 @@ import EditorHeader from "./EditorHeader"
 import EditorContent from "./EditorContent"
 import slugify from "../../utils/slugify"
 import update_article from "../../utils/update_article"
+import useHotkeySave from "../../hooks/useHotkeySave"
 import styles from "./Editor.module.css"
 
 const Editor: FunctionComponent = () => {
@@ -13,7 +14,7 @@ const Editor: FunctionComponent = () => {
 
     const slugParam = useParams().slug || ""
     const { accessToken } = useContext(UserContext)
-    
+
     const [articleId, setArticleId] = useState<string>("")
     const [slug, setSlug] = useState<string>(slugParam)
     const [title, setTitle] = useState<string>("")
@@ -21,18 +22,18 @@ const Editor: FunctionComponent = () => {
     const [content, setContent] = useState<string>("")
     const [createdAt, setCreatedAt] = useState<string>("")
     const [updatedAt, setUpdatedAt] = useState<string>("")
-    
 
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault()
-        
+
+    function handleSubmit(e?: FormEvent) {
+        e?.preventDefault()
+
         update_article(accessToken, articleId, slug, title, category, content)
             .then(data => {
-                if(data.error) {
+                if (data.error) {
                     console.log(data.error)
                     return
                 }
-                if(data) {
+                if (data) {
                     // console.log(data.updated_article)
                     navigate(`/editor/slug/${data.updated_article.slug}/`) // navigate to new slug
                     return
@@ -84,18 +85,23 @@ const Editor: FunctionComponent = () => {
 
     }, [slugParam, accessToken])
 
+    // listen to keyboard shortcuts
+    useHotkeySave(() => {
+        handleSubmit()
+    })
 
     return (
         <>
             {title && content ?
                 <div className={styles.editor_wrapper}>
-                    <form 
+                    <form
                         id="editor_form"
                         name="editor_form"
                         onSubmit={handleSubmit}
                     >
                         <section className={styles.editor_top_section}>
-                            <EditorHeader 
+                            <EditorHeader
+                                article_id={articleId}
                                 slug={slug}
                                 title={title}
                                 category_name={category}
@@ -106,16 +112,16 @@ const Editor: FunctionComponent = () => {
                                 access_token={accessToken}
                             />
                         </section>
-                        <EditorContent 
+                        <EditorContent
                             content={content}
                             handleContent={handleContent}
                         />
                     </form>
                 </div>
-            : <>
-                <LoadingSpinner />
-                <span style={{marginLeft: ".75rem"}}>Loading...</span>
-            </>}                
+                : <>
+                    <LoadingSpinner />
+                    <span style={{ marginLeft: ".75rem" }}>Loading...</span>
+                </>}
         </>
     )
 }

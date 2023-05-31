@@ -4,6 +4,7 @@
     border: 1px solid var(--clr_grey_shade_d);
     padding: .5rem;
 }
+
 [data-theme="dark"] .dashboard_container {
     background-color: var(--clr_dark_shade_a);
     border-color: var(--clr_grey_shade_a);
@@ -13,54 +14,68 @@
     width: 100%;
     border-collapse: collapse;
 }
+
 .articles_table thead {
     border-bottom: 1px solid var(--clr_grey_shade_d);
 }
+
 [data-theme="dark"] .articles_table thead {
     border-color: var(--clr_grey_shade_a);
 }
+
 .articles_table thead td {
     padding: .25rem 0;
     color: var(--clr_grey_shade_a);
 }
+
 .articles_table thead td:first-of-type {
     padding-left: .5rem;
 }
+
 .articles_table thead td:last-of-type {
     padding-right: .5rem;
 }
+
 [data-theme="dark"] .articles_table thead td {
     color: var(--clr_grey_shade_d);
 }
+
 .articles_table tbody {
     width: 100%;
 }
+
 .articles_table .row {
     width: 100%;
     transition: 50ms background-color ease-out;
 }
+
 .articles_table .row:hover,
 .articles_table .row:focus {
     cursor: pointer;
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0, 0, 0, .05);
 }
+
 [data-theme="dark"] .articles_table .row:hover,
 [data-theme="dark"] .articles_table .row:focus {
-    background-color: rgba(255,255,255,.05);
+    background-color: rgba(255, 255, 255, .05);
 }
+
 .articles_table .row td {
     padding: .5rem 0;
     min-width: 20%;
 }
+
 .articles_table .row td:first-of-type {
     padding-left: .5rem;
     min-width: 40%;
     /* outline: 1px solid red; */
 }
+
 .articles_table .row td:nth-of-type(2) {
     min-width: 20%;
     /* outline: 1px solid green; */
 }
+
 .articles_table .row td:last-of-type {
     padding-right: .5rem;
 }
@@ -68,21 +83,16 @@
 .articles_table .td_datetime {
     font-size: calc(var(--type_scale_1) * 0.875);
 }
-@media screen and (max-width: 64em) {
-    .articles_table .td_time,
-    .articles_table .td_date {
-        display: flex; 
-        flex-direction: column;
-        align-items: flex-start;
-        /* outline: 1px solid red; */
-    }
-}
+
 .articles_table .td_time {
+    display: inline-block;
     margin-right: .5rem;
 }
+
 .articles_table .td_date {
     color: var(--clr_grey_shade_b);
 }
+
 [data-theme="dark"] .articles_table .td_date {
     color: var(--clr_grey_shade_d);
 }

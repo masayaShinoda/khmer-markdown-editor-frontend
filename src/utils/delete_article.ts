@@ -1,34 +1,21 @@
 export default async function delete_article(
-    token: string, 
-    slug: string,
+    token: string,
+    article_id: string,
 ) {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/article/${slug}/`
-
-    let response
+    const url = `${import.meta.env.VITE_BACKEND_URL}/article/${article_id}/`
 
     try {
-        response = await fetch(url, {
+        const response = await fetch(url, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                "slug": slug,
-            })
+            }
         })
+
+        return response.json()
+
     } catch (err) {
         return { "error": err }
-    }
-
-    if(response?.ok) {
-        return response.json()
-    } else {
-        return {
-            "error": {
-                "code": response?.status,
-                "message": response?.json()    
-            }
-        }
     }
 }

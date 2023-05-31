@@ -1,8 +1,8 @@
 export default async function save_article(
-    token: string, 
+    token: string,
     slug: string,
-    title: string, 
-    category: string, 
+    title: string,
+    category: string,
     content: string
 ) {
     const url = `${import.meta.env.VITE_BACKEND_URL}/article/`
@@ -27,13 +27,13 @@ export default async function save_article(
         return { "error": err }
     }
 
-    if(response?.ok) {
+    if (response?.ok) {
         return response.json()
     } else {
         return {
             "error": {
                 "code": response?.status,
-                "message": response?.json()    
+                "message": response?.json()
             }
         }
     }
