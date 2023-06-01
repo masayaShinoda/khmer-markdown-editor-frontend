@@ -1,5 +1,6 @@
 .layout {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     background-color: var(--clr_light);
     color: var(--clr_dark);
@@ -9,36 +10,40 @@
 
     transition: color 200ms ease-out, background-color 200ms ease-out;
 }
+
 .layout[data-theme="dark"] {
     color: var(--clr_light);
     background-color: var(--clr_dark);
 }
+
 @media screen and (max-width: 64em) {
     .layout {
         grid-template-columns: 3.75rem auto;
     }
 }
+
 @media screen and (max-width: 40em) {
     .layout {
-        grid-template-columns: none;
-        grid-template-rows: 5rem auto;
+        grid-template-columns: auto;
     }
 }
 
 
 .main {
     padding: 2.5rem 2.5rem;
+    max-width: 100%;
     /* overflow-x: hidden; */
 }
+
 @media screen and (max-width: 64em) {
     .main {
         padding: 2.5rem 1.75rem;
     }
 }
+
 @media screen and (max-width: 40em) {
     .main {
         padding: 2.5rem 1rem;
         width: 100%;
-        max-width: 100%;
     }
 }

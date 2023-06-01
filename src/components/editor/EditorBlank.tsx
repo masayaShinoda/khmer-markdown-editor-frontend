@@ -56,18 +56,16 @@ const EditorBlank: FunctionComponent = () => {
 	return (
 		<div className={styles.editor_wrapper}>
 			<form id="editor_form" name="editor_form" onSubmit={handleSubmit}>
-				<section className={styles.editor_top_section}>
-					<EditorHeader
-						is_blank_page={true}
-						article_id=""
-						slug={slug}
-						title={title}
-						category_name={category}
-						handleTitle={handleTitle}
-						handleCategory={handleCategory}
-						access_token={accessToken}
-					/>
-				</section>
+				<EditorHeader
+					is_blank_page={true}
+					article_id=""
+					slug={slug}
+					title={title}
+					category_name={category}
+					handleTitle={handleTitle}
+					handleCategory={handleCategory}
+					access_token={accessToken}
+				/>
 				<EditorContent content={content} handleContent={handleContent} />
 			</form>
 		</div>

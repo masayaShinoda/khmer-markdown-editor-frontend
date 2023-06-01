@@ -3,6 +3,7 @@
     border-radius: .5rem;
     border: 1px solid var(--clr_grey_shade_d);
     padding: .5rem;
+    max-width: 64em;
 }
 
 [data-theme="dark"] .dashboard_container {

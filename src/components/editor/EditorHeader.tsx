@@ -46,48 +46,50 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
 
     return <section className={styles.editor_header}>
         <div className={styles.top_section}>
-            <nav style={{ marginRight: `1rem` }}>
-                <BackButton back_to="/" />
-            </nav>
-            <input
-                required
-                type="text"
-                name="title"
-                value={props.title}
-                placeholder="[ចំណងជើង]"
-                onChange={handleTitleInput}
-                className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
-            />
-            <button
-                id="submit_editor_form"
-                type="submit"
-                aria-label="Save progress"
-                className="btn_main"
-                style={{
-                    marginLeft: `1rem`
-                }}
-            >
-                <i className="icon save"></i>
-                <span>រក្សា&#8288;ទុក</span>
-            </button>
-            {
-                !props.is_blank_page ?
-                    <button
-                        onClick={handleDeleteButton}
-                        type="button"
-                        aria-label="Delete"
-                        className="btn_main"
-                        style={{
-                            marginLeft: `.5rem`
-                        }}
-                    >
-                        <i className="icon trash"></i>
-                        <span>
-                            លុប
-                        </span>
-                    </button>
-                    : null
-            }
+            <div className={styles.editor_header_title_section}>
+                <nav style={{ marginRight: `1rem` }}>
+                    <BackButton back_to="/" />
+                </nav>
+                <input
+                    required
+                    type="text"
+                    name="title"
+                    value={props.title}
+                    placeholder="[ចំណងជើង]"
+                    onChange={handleTitleInput}
+                    className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
+                />
+            </div>
+            <div className={styles.editor_header_action_buttons}>
+                <button
+                    id="submit_editor_form"
+                    type="submit"
+                    aria-label="Save progress"
+                    className="btn_main"
+                >
+                    <i className="icon save"></i>
+                    <span>រក្សា&#8288;ទុក</span>
+                </button>
+                {
+                    !props.is_blank_page ?
+                        <button
+                            onClick={handleDeleteButton}
+                            type="button"
+                            aria-label="Delete"
+                            className="btn_main"
+                            style={{
+                                marginLeft: `.5rem`
+                            }}
+                        >
+                            <i className="icon trash"></i>
+                            <span>
+                                លុប
+                            </span>
+                        </button>
+                        : null
+                }
+
+            </div>
         </div>
         <div className={styles.date_section}>
             {props.created_at ?

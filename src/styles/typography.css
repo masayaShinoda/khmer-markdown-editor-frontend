@@ -6,8 +6,10 @@ html {
     --type_scale_2: 1.25rem;
     --type_scale_1: 1rem;
 
-    font-size: 100%; /* 16px */
+    font-size: 100%;
+    /* 16px */
 }
+
 html[lang="km"] {
     /* bigger font for khmer site */
     font-size: 18px;
@@ -27,13 +29,17 @@ body {
     font-weight: 400;
     line-height: 1.75;
 }
-  
+
 p {
     margin-bottom: 1rem;
     font-size: var(--type_scale_1);
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     /* margin: 3rem 0 1.38rem; */
     margin-bottom: 1.38rem;
     font-weight: 400;
@@ -45,12 +51,27 @@ h1 {
     font-size: var(--type_scale_5);
 }
 
-h2 {font-size: var(--type_scale_4)}
+h2 {
+    font-size: var(--type_scale_4)
+}
 
-h3 {font-size: var(--type_scale_3);}
+h3 {
+    font-size: var(--type_scale_3);
+}
 
-h4 {font-size: var(--type_scale_2);}
+h4 {
+    font-size: var(--type_scale_2);
+}
 
-h5 {font-size: calc(var(--type_scale_1) * 1.125);}
+h5 {
+    font-size: calc(var(--type_scale_1) * 1.125);
+}
 
-small, .text_small {font-size: calc(var(--type_scale_1) * 0.95);}
+small,
+.text_small {
+    font-size: calc(var(--type_scale_1) * 0.95);
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}

@@ -150,6 +150,7 @@
     .navbar {
         position: fixed;
         bottom: 0;
+        top: unset;
         padding: .5rem 1rem;
         border-right: none;
         border-top: 1px solid var(--clr_grey_shade_d);
@@ -178,7 +179,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
     }
 
     .nav .nav_link:not(:last-of-type) {

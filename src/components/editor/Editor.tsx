@@ -92,26 +92,25 @@ const Editor: FunctionComponent = () => {
 
     return (
         <>
-            {title && content ?
+            {/* updatedAt is the condition to listen to because title, category, and content can be empty when user is editing */}
+            {updatedAt ?
                 <div className={styles.editor_wrapper}>
                     <form
                         id="editor_form"
                         name="editor_form"
                         onSubmit={handleSubmit}
                     >
-                        <section className={styles.editor_top_section}>
-                            <EditorHeader
-                                article_id={articleId}
-                                slug={slug}
-                                title={title}
-                                category_name={category}
-                                created_at={createdAt}
-                                updated_at={updatedAt}
-                                handleTitle={handleTitle}
-                                handleCategory={handleCategory}
-                                access_token={accessToken}
-                            />
-                        </section>
+                        <EditorHeader
+                            article_id={articleId}
+                            slug={slug}
+                            title={title}
+                            category_name={category}
+                            created_at={createdAt}
+                            updated_at={updatedAt}
+                            handleTitle={handleTitle}
+                            handleCategory={handleCategory}
+                            access_token={accessToken}
+                        />
                         <EditorContent
                             content={content}
                             handleContent={handleContent}

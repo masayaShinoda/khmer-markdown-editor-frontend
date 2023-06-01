@@ -1,55 +1,114 @@
 .editor_wrapper {
     display: flex;
     flex-direction: column;
-    max-width: min(100%, 48em);
-    
-    /* outline: 1px solid red; */
-
+    max-width: 100%;
     --selection_bg_clr: rgba(0, 79, 134, 0.1);
+
+    margin-bottom: 1.5rem;
 }
+
 [data-theme="dark"] .editor_wrapper {
     --selection_bg_clr: rgba(0, 149, 255, 0.25);
+}
+
+.editor_wrapper form {
+    max-width: 100%;
 }
 
 /* contains title, date modified, category... */
 .editor_header {
     padding-bottom: .5rem;
+    max-width: min(100%, 64em);
     /* border-bottom: 1px solid var(--clr_grey_shade_d); */
 }
-/* [data-theme="dark"] .editor_header {
-    border-bottom-color: var(--clr_grey_shade_a);
-} */
 
 .editor_header .top_section {
     display: flex;
     align-items: center;
-
     margin-bottom: 1rem;
 }
 
-.editor_header .date_section {
-    display: flex; flex-direction: column; align-items: flex-start;
+.editor_header_title_section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
+
+.editor_header_action_buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.editor_header .date_section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .editor_header .date_label {
     color: var(--clr_grey_shade_a);
     margin-right: .325rem;
 }
+
 [data-theme="dark"] .editor_header .date_label {
     color: var(--clr_grey_shade_d);
 }
 
+@media screen and (max-width: 48em) {
+    .editor_header .top_section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .editor_header .editor_header_title_section {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .editor_header_action_buttons {
+        margin-top: 1rem;
+    }
+
+    .editor_header .date_section {
+        flex-direction: row;
+    }
+
+    .editor_header .date_section>span {
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* outline: 1px solid red; */
+    }
+}
+
+
 .editor_content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 1.75rem 0;
+    max-width: 100%;
     /* outline: 1px solid red; */
+}
+
+@media screen and (max-width: 48em) {
+    .editor_content {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* inputs */
 .editor_input_text {
     appearance: none;
     background: none;
-    border: transparent; outline: transparent;
+    border: transparent;
+    outline: transparent;
     transition: 100ms ease-out background-color;
 }
+
 [data-theme="dark"] .editor_input_text {
     color: #fff;
 }
@@ -65,31 +124,72 @@
     width: 100%;
     font-size: var(--type_scale_4);
     border-bottom: 2px dashed var(--clr_grey_shade_d);
+    margin-right: 1rem;
 }
+
 [data-theme="dark"] .editor_input_text__title {
     border-bottom-color: var(--clr_grey_shade_a);
 }
 
+@media screen and (max-width: 48em) {
+    .editor_input_text__title {
+        margin-right: 0;
+    }
+}
+
+.editor_textarea,
+.markdown_output_container {
+    max-height: 32em;
+    overflow: scroll;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap
+}
 
 .editor_textarea {
     appearance: none;
     background: none;
-    border: transparent; outline: transparent;
+    border: transparent;
+    outline: transparent;
     resize: none;
     width: min(100%, 40em);
-    max-width: 48em;
-    font-size: var(--type_scale_2);
-    
+    max-width: min(48em, 100%);
+    font-size: var(--type_scale_1);
+
     padding: 2rem;
-    min-height: 40em;
+    min-height: 32em;
     background-color: #fff;
-    box-shadow: 0 .25rem .5rem rgba(0,0,0,.075);
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .075);
 }
+
 [data-theme="dark"] .editor_textarea {
     color: #fff;
     background-color: var(--clr_dark_shade_a);
     box-shadow: none;
 }
+
 .editor_textarea::selection {
     background-color: var(--selection_bg_clr);
+}
+
+.markdown_output_container {
+    padding: 2rem;
+    min-height: 32em;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+
+@media screen and (max-width: 48em) {
+
+    .editor_textarea,
+    .markdown_output_container {
+        min-height: 35vh;
+        max-height: none;
+        /* width: 100%; */
+        max-width: 100%;
+        padding: 1rem;
+    }
 }
