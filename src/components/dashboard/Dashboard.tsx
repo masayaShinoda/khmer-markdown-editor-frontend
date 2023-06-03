@@ -1,13 +1,14 @@
-import { 
+import {
   FunctionComponent,
   useContext,
   useState,
   useEffect,
-} 
-from "react"
+}
+  from "react"
 import { Link } from "react-router-dom"
-import Row from "./Row"
 import { UserContext } from "../../context/UserContext"
+import Row from "./Row"
+import LoadingSpinner from "../utils/LoadingSpinner"
 import styles from "./Dashboard.module.css"
 
 const Dashboard: FunctionComponent = () => {
@@ -25,7 +26,7 @@ const Dashboard: FunctionComponent = () => {
   const [articles, setArticles] = useState<Array<Article>>([])
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/articles/`, 
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/articles/`,
       {
         method: "GET",
         headers: {
@@ -35,24 +36,24 @@ const Dashboard: FunctionComponent = () => {
       }
     )
       .then(res => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           return res.json()
         }
       })
       .then(data => {
-        if(data) {
+        if (data) {
           const articles: Array<Article> = Array.from(data)
-          
+
           setArticles(articles.map((article: Article, index: number) => {
-              return {
-                key: index,
-                slug: article.slug,
-                title: article.title,
-                category_name: article.category_name,
-                updated_at: article.updated_at,
-                created_at: article.created_at,
-              }
-            })
+            return {
+              key: index,
+              slug: article.slug,
+              title: article.title,
+              category_name: article.category_name,
+              updated_at: article.updated_at,
+              created_at: article.created_at,
+            }
+          })
           )
         } else {
           return "Error fetching data."
@@ -61,14 +62,23 @@ const Dashboard: FunctionComponent = () => {
   }, [accessToken])
 
   return <div>
-    <h1>ទំព័រដើម</h1>
-    {user ? 
-      <p>
-        <i className="icon account" style={{width: `.75rem`, height: `.75rem`, marginRight: `.5rem`}}></i>
-        ឈ្មោះគណនី៖ <Link to="/account">{user.username}</Link>
-      </p> 
-    : null}
-    
+    <div style={{display: `flex`, justifyContent: `space-between`, alignItems: `center`}}>
+      <h1>ទំព័រដើម</h1>
+      {user ?
+        <p>
+          <i className="icon account" style={{ width: `.75rem`, height: `.75rem`, marginRight: `.5rem` }}></i>
+          ឈ្មោះគណនី៖ <Link to="/account">{user.username}</Link>
+        </p>
+        : null}
+    </div>
+    <div className={styles.dashboard_container_controls}>
+      <Link to="/editor/new" className="btn_main">
+        <i className="icon add_document"></i>
+        <span>
+          បង្កើតអត្តបទថ្មី
+        </span>
+      </Link>
+    </div>
     <div className={styles.dashboard_container}>
       <table className={styles.articles_table}>
         <thead>
@@ -80,22 +90,31 @@ const Dashboard: FunctionComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {articles.length > 0 ? 
-            articles.map((article, i) => {
-              return <Row 
-                        key={i}
-                        slug={article.slug}
-                        title={article.title} 
-                        updated_at={article.updated_at} 
-                        created_at={article.created_at}
-                        category_name={article.category_name}
-                      />
-            })
-          : <tr style={{padding: `1rem 0`}}>
-              <td>
-                <Link to="/editor/new" className="utils type_scale_2">សរសេរអត្តបទថ្មី →</Link>
-              </td>
-          </tr> 
+          {
+            articles ?
+              articles.length > 0 ?
+                articles.map((article, i) => {
+                  return <Row
+                    key={i}
+                    slug={article.slug}
+                    title={article.title}
+                    updated_at={article.updated_at}
+                    created_at={article.created_at}
+                    category_name={article.category_name}
+                  />
+                })
+                : <tr>
+                  <td style={{ padding: `1.5rem .5rem` }}>
+                    <span>មិនទាន់មានអត្តបទទេ។</span>
+                    <Link to="/editor/new">
+                      <span>&nbsp;បង្កើតអត្តបទថ្មី →</span>
+                    </Link>
+                  </td>
+                </tr>
+              : <>
+                <LoadingSpinner />
+                <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
+              </>
           }
         </tbody>
       </table>

@@ -33,7 +33,7 @@ const Navbar: FunctionComponent = () => {
             name: "ការកំណត់",
         },
         {
-            path: "/help",
+            path: "/tutorial",
             icon_class: "question",
             name: "របៀបប្រើប្រាស់",
         },

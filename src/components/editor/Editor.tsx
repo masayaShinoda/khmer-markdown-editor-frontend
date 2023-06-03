@@ -119,7 +119,7 @@ const Editor: FunctionComponent = () => {
                 </div>
                 : <>
                     <LoadingSpinner />
-                    <span style={{ marginLeft: ".75rem" }}>Loading...</span>
+                    <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
                 </>}
         </>
     )

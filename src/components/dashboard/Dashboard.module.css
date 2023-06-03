@@ -1,3 +1,7 @@
+.dashboard_container_controls {
+    max-width: max-content;
+    margin: .5rem 0 1rem 0;
+}
 .dashboard_container {
     background-color: #fff;
     border-radius: .5rem;

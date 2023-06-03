@@ -96,7 +96,6 @@
 }
 
 .nav .nav_link .icon {
-    margin-right: .75rem;
     width: 1rem;
     height: 1rem;
     filter: var(--filter_clr_gray_shade_a);
@@ -108,6 +107,10 @@
 
 [data-theme="dark"] .nav .nav_link .icon {
     filter: invert(0.92);
+}
+
+.nav .nav_link > span {
+    margin-left: .75rem;
 }
 
 @media screen and (max-width: 64em) {
@@ -140,7 +143,7 @@
         height: 1.25rem;
     }
 
-    .nav .nav_link span {
+    .nav .nav_link > span {
         display: none;
     }
 }
