@@ -76,11 +76,19 @@
     }
 
     .editor_header .date_section>span {
-
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        min-width: 45%;
         /* outline: 1px solid red; */
+    }
+
+    .editor_header .date_section>span time {
+        font-size: .875rem;
+    }
+
+    .editor_header .date_section>span:not(:last-of-type) {
+        margin-right: .5rem;
     }
 }
 
@@ -144,7 +152,7 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-all;
-    white-space: pre-wrap
+    /* white-space: pre-wrap */
 }
 
 .editor_textarea {

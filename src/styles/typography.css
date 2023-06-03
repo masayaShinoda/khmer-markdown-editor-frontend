@@ -7,13 +7,13 @@ html {
     --type_scale_1: 1rem;
 
     font-size: 100%;
-    letter-spacing: 1px;
     /* 16px */
 }
 
 html[lang="km"] {
     /* bigger font for khmer site */
     font-size: 18px;
+    letter-spacing: 1px;
 }
 
 @media screen and (max-width: 48em) {
