@@ -61,7 +61,7 @@ const Dashboard: FunctionComponent = () => {
       })
   }, [accessToken])
 
-  return <div>
+  return <>
     <div style={{display: `flex`, justifyContent: `space-between`, alignItems: `center`}}>
       <h1>ទំព័រដើម</h1>
       {user ?
@@ -119,7 +119,7 @@ const Dashboard: FunctionComponent = () => {
         </tbody>
       </table>
     </div>
-  </div>
+  </>
 }
 
 export default Dashboard

@@ -5,9 +5,11 @@
 .dashboard_container {
     background-color: #fff;
     border-radius: .5rem;
-    border: 1px solid var(--clr_grey_shade_d);
     padding: .5rem;
-    max-width: 64em;
+    max-width: min(64em, 100%);
+    overflow-x: auto;
+    border: 1px solid var(--clr_grey_shade_d);
+    /* outline: 1px solid red; */
 }
 
 [data-theme="dark"] .dashboard_container {
@@ -17,8 +19,14 @@
 
 .articles_table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
 }
+/* @media screen and (max-wdith: 48em) {
+    .articles_table {
+        overflow-x: scroll;
+    }
+} */
 
 .articles_table thead {
     border-bottom: 1px solid var(--clr_grey_shade_d);

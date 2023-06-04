@@ -13,7 +13,6 @@ html {
 html[lang="km"] {
     /* bigger font for khmer site */
     font-size: 18px;
-    letter-spacing: 1px;
 }
 
 @media screen and (max-width: 48em) {

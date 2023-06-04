@@ -36,8 +36,9 @@
   filter: brightness(1.125);
 }
 
+a.btn_main,
 a.btn_main:hover {
-  color: unset
+  color: unset;
 }
 
 .btn_main:focus {

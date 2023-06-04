@@ -30,7 +30,7 @@ const AccountDetails: FunctionComponent<Props> = (props: Props) => {
         </div>
 
         <button
-            className="btn_main scale_2"
+            className="btn_main"
             aria-label="Sign out"
             onClick={handleSignOut}
         >

@@ -31,8 +31,9 @@
 
 .main {
     padding: 2.5rem 2.5rem;
+    width: 100%;
     max-width: 100%;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 
 @media screen and (max-width: 64em) {
@@ -44,6 +45,5 @@
 @media screen and (max-width: 40em) {
     .main {
         padding: 2.5rem 1rem;
-        width: 100%;
     }
 }
