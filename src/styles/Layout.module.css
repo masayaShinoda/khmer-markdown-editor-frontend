@@ -32,7 +32,7 @@
 .main {
     padding: 2.5rem 2.5rem;
     width: 100%;
-    max-width: 100%;
+    max-width: min(64em, 100%);
     overflow-x: hidden;
 }
 

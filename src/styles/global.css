@@ -84,3 +84,22 @@ a:focus {
 [data-theme="dark"] a:focus {
     color: var(--clr_secondary_shade_a);
 }
+
+.content_kh {
+    /* use this to make khmer text more readable */
+    letter-spacing: 0.03125rem; /* 0.5px */
+    margin-bottom: 2.5em;
+}
+.content_kh p,
+.content_kh a {
+    font-size: 1.125rem;
+}
+
+.content_kh code {
+    padding: .5rem;
+    background-color: var(--clr_grey_shade_e);
+    border-radius: .25rem;
+}
+[data-theme="dark"] .content_kh code {
+    background-color: var(--clr_grey_shade_a);
+}
