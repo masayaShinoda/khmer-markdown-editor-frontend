@@ -107,7 +107,7 @@ const Dashboard: FunctionComponent = () => {
                   <td style={{ padding: `1.5rem .5rem` }}>
                     <span>មិនទាន់មានអត្តបទទេ។</span>
                     <Link to="/editor/new">
-                      <span>&nbsp;បង្កើតអត្តបទថ្មី →</span>
+                      <span>&nbsp;បង្កើតអត្តបទថ្មី&nbsp;→</span>
                     </Link>
                   </td>
                 </tr>

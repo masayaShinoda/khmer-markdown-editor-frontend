@@ -1,7 +1,13 @@
+// utility component for loading spinner
 import { FunctionComponent } from "react"
 
-const LoadingSpinner: FunctionComponent = () => {
-    return <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+interface Props {
+    theme?: "dark" | "primary",
+}
+
+const LoadingSpinner: FunctionComponent<Props> = (props: Props) => {
+
+    return <div className={`lds-ring ${props.theme ? props.theme : ""}`}><div></div><div></div><div></div><div></div></div>
 }
 
 export default LoadingSpinner
