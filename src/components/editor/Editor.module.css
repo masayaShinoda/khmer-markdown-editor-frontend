@@ -148,7 +148,7 @@
 .editor_textarea,
 .markdown_output_container {
     max-height: 32em;
-    overflow: scroll;
+    overflow-y: scroll;
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-all;
@@ -200,4 +200,36 @@
         max-width: 100%;
         padding: 1rem;
     }
+}
+
+.editor_indicator_container {
+    display: inline-flex;
+    align-items: center;
+    padding: .75rem;
+    background-color: #fff;
+    border-radius: .5rem;
+    box-shadow: var(--box_shadow_primary);
+
+    position: fixed;
+    /* bottom: 1.5rem;  */
+    right: 2rem;
+
+    animation-name: indicator-slide-in;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    /* transition: 200ms ease-in ; */
+}
+
+@keyframes indicator-slide-in {
+    0% {
+        bottom: 0;
+    }
+
+    100% {
+        bottom: 2.5rem;
+    }
+}
+
+.editor_indicator_text {
+    margin-left: .25rem;
 }

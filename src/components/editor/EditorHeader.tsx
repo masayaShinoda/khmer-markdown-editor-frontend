@@ -57,6 +57,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                     value={props.title}
                     placeholder="[ចំណងជើង]"
                     onChange={handleTitleInput}
+                    onKeyDown={(e) => { e.key === "Enter" && e.preventDefault() }} // prevent enter key from submitting
                     className={`${styles.editor_input_text} ${styles.editor_input_text__title}`}
                 />
             </div>
@@ -111,6 +112,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                         placeholder={category_from_props.length > 0 ? category_from_props : "មិនកំណត់"}
                         value={props.category_name}
                         onChange={handleCategoryInput}
+                        onKeyDown={(e) => { e.key === "Enter" && e.preventDefault() }} // prevent enter key from submitting
                         className={`${styles.editor_input_text}`}
                     />
                 </span>

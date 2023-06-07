@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../context/UserContext"
 import EditorHeader from "./EditorHeader"
 import EditorContent from "./EditorContent"
+import EditorIndicator from "./EditorIndicator"
 import ToastMessage from "../utils/ToastMessage"
 import save_article from "../../utils/save_article"
 import slugify from "../../utils/slugify"
@@ -21,24 +22,30 @@ const EditorBlank: FunctionComponent = () => {
 
 	const [activeToastMsg, setActiveToastMsg] = useState<string | null>(null)
 
-    const [connectionError, setConnectionError] = useState<boolean>(false)
+	const [isSaving, setIsSaving] = useState<boolean>(false)
+	const [connectionError, setConnectionError] = useState<boolean>(false)
 
 
 	function handleSubmit(e?: FormEvent) {
 		e?.preventDefault()
 
+		setIsSaving(true)
+
 		save_article(accessToken, slug, title, category, content).then((data) => {
 			if (data.error) {
 				// console.log(data.error)
 				setConnectionError(true)
+				setIsSaving(false)
 				return
 			}
 			if (data) {
 				setConnectionError(false)
 				navigate(`/editor/slug/${slug}`)
+				setIsSaving(false)
 				return
 			}
 		})
+
 	}
 
 	function handleTitle(title: string) {
@@ -58,19 +65,19 @@ const EditorBlank: FunctionComponent = () => {
 
 	// listen to keyboard shortcuts
 	useHotkeySave(() => {
-		handleSubmit()
+		document.getElementById("submit_editor_form")?.click()
 	})
 
 	// object to store possible toast message contents, and their corresponding class names
-    const ToastMessages = {
-        "connectionError": {
-            "message": "កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។",
-            "util_classes": "clr_danger bg_clr_danger_translucent",
-        }
-    }
+	const ToastMessages = {
+		"connectionError": {
+			"message": "កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។",
+			"util_classes": "clr_danger bg_clr_danger_translucent",
+		}
+	}
 
 	useEffect(() => {
-		if(connectionError) {
+		if (connectionError) {
 			setActiveToastMsg("connectionError")
 		}
 	}, [connectionError])
@@ -99,6 +106,9 @@ const EditorBlank: FunctionComponent = () => {
 					}
 				</div>
 				<EditorContent content={content} handleContent={handleContent} />
+				{isSaving ?
+					<EditorIndicator text="កំពុងរក្សាទុក" />
+					: null}
 			</form>
 		</div>
 	)
