@@ -47,7 +47,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
     return <section className={styles.editor_header}>
         <div className={styles.top_section}>
             <div className={styles.editor_header_title_section}>
-                <nav style={{ marginRight: `1rem` }}>
+                <nav style={{ marginRight: `.5rem` }}>
                     <BackButton back_to="/" />
                 </nav>
                 <input

@@ -151,7 +151,7 @@
     overflow-y: scroll;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    word-break: break-all;
+    hyphens: auto;
     /* white-space: pre-wrap */
 }
 
@@ -194,11 +194,20 @@
 
     .editor_textarea,
     .markdown_output_container {
-        min-height: 35vh;
-        max-height: none;
+        min-height: 32em;
+        max-height: 32em;
         /* width: 100%; */
         max-width: 100%;
         padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 48em) {
+
+    .editor_textarea,
+    .markdown_output_container {
+        min-height: 28em;
+        max-height: 28em;
     }
 }
 

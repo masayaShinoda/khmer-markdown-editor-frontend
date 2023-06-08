@@ -23,7 +23,7 @@ const Dashboard: FunctionComponent = () => {
     created_at: string,
   }
 
-  const [articles, setArticles] = useState<Array<Article>>([])
+  const [articles, setArticles] = useState<Array<Article> | null>(null)
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/articles/`,
@@ -62,7 +62,7 @@ const Dashboard: FunctionComponent = () => {
   }, [accessToken])
 
   return <>
-    <div style={{display: `flex`, justifyContent: `space-between`, alignItems: `center`}}>
+    <div style={{ display: `flex`, justifyContent: `space-between`, alignItems: `center` }}>
       <h1>ទំព័រដើម</h1>
       {user ?
         <p>
@@ -104,7 +104,7 @@ const Dashboard: FunctionComponent = () => {
                   />
                 })
                 : <tr>
-                  <td style={{ padding: `1.5rem .5rem` }}>
+                  <td>
                     <span>មិនទាន់មានអត្តបទទេ។</span>
                     <Link to="/editor/new">
                       <span>&nbsp;បង្កើតអត្តបទថ្មី&nbsp;→</span>
