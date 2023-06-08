@@ -151,7 +151,7 @@
     overflow-y: scroll;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    word-break: break-all;
+    hyphens: auto;
     /* white-space: pre-wrap */
 }
 
