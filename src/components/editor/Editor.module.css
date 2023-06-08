@@ -229,6 +229,10 @@
     /* transition: 200ms ease-in ; */
 }
 
+[data-theme="dark"] .editor_indicator_container {
+    background-color: var(--clr_grey_shade_a);
+}
+
 @keyframes indicator-slide-in {
     0% {
         bottom: 0;

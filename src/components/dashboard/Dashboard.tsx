@@ -111,10 +111,12 @@ const Dashboard: FunctionComponent = () => {
                     </Link>
                   </td>
                 </tr>
-              : <>
-                <LoadingSpinner />
-                <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
-              </>
+              : <tr>
+                <td>
+                  <LoadingSpinner />
+                  <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
+                </td>
+              </tr>
           }
         </tbody>
       </table>

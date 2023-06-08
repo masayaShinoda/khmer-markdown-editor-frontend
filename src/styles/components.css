@@ -213,6 +213,9 @@ a.btn_main:hover {
 .lds-ring.primary div {
   border-color: var(--clr_primary_shade_a) transparent transparent transparent;
 }
+[data-theme="dark"] .lds-ring.primary div {
+  border-color: var(--clr_secondary_shade_a) transparent transparent transparent;
+}
 
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
