@@ -159,7 +159,7 @@ const Editor: FunctionComponent = () => {
                     </form>
                 </div>
                 : <>
-                    <LoadingSpinner />
+                    <LoadingSpinner theme="primary" />
                     <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
                 </>}
         </>

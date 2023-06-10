@@ -104,7 +104,7 @@ const Dashboard: FunctionComponent = () => {
                   />
                 })
                 : <tr>
-                  <td style={{padding: ".75rem .5rem"}}>
+                  <td style={{ padding: ".75rem .5rem" }}>
                     <span>មិនទាន់មានអត្តបទទេ។&nbsp;</span>
                     <Link to="/editor/new">
                       <span>បង្កើតអត្តបទថ្មី&nbsp;→</span>
@@ -112,8 +112,8 @@ const Dashboard: FunctionComponent = () => {
                   </td>
                 </tr>
               : <tr>
-                <td>
-                  <LoadingSpinner />
+                <td style={{ padding: ".75rem .5rem" }}>
+                  <LoadingSpinner theme="primary" />
                   <span style={{ marginLeft: ".75rem" }}>កំពុងទាញយកទិន្នន័យ...</span>
                 </td>
               </tr>
