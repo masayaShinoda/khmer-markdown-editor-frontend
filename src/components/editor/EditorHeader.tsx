@@ -66,7 +66,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                     id="submit_editor_form"
                     type="submit"
                     aria-label="Save progress"
-                    className="btn_main"
+                    className={`btn_main btn_main__clr_secondary ${styles.editor_header_action_button}`}
                 >
                     <i className="icon save"></i>
                     <span>រក្សា&#8288;ទុក</span>
@@ -77,7 +77,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                             onClick={handleDeleteButton}
                             type="button"
                             aria-label="Delete"
-                            className="btn_main"
+                            className={`btn_main ${styles.editor_header_action_button}`}
                             style={{
                                 marginLeft: `.5rem`
                             }}

@@ -41,6 +41,22 @@
     flex-direction: row;
 }
 
+@media screen and (max-width: 40em) {
+    .editor_header_action_buttons button.editor_header_action_button {
+        padding: .875rem;
+    }
+
+    .editor_header_action_buttons button.editor_header_action_button>span {
+        display: none;
+        /* outline: 1px solid red; */
+    }
+
+    .editor_header_action_buttons button.editor_header_action_button>i {
+        margin: 0;
+        /* outline: 1px solid red; */
+    }
+}
+
 .editor_header .date_section {
     display: flex;
     align-items: center;
@@ -51,10 +67,14 @@
 }
 
 input.editor_header_input_category {
-    background-color: var(--clr_dark_shade_a);
+    background-color: var(--clr_grey_shade_e);
     padding: .25rem .5rem;
     border-radius: .25rem;
     /* border-bottom: 2px dashed var(--clr_grey_shade_d); */
+}
+
+[data-theme="dark"] input.editor_header_input_category {
+    background-color: var(--clr_dark_shade_a);
 }
 
 .editor_header .date_label {
@@ -121,7 +141,7 @@ input.editor_header_input_category {
         margin-bottom: .5rem;
     }
 
-    
+
     .editor_header_input_category_container {
         width: 100%;
         /* outline: 1px solid red; */
