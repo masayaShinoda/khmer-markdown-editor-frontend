@@ -66,7 +66,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                     id="submit_editor_form"
                     type="submit"
                     aria-label="Save progress"
-                    className="btn_main"
+                    className={`btn_main btn_main__clr_secondary ${styles.editor_header_action_button}`}
                 >
                     <i className="icon save"></i>
                     <span>រក្សា&#8288;ទុក</span>
@@ -77,7 +77,7 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                             onClick={handleDeleteButton}
                             type="button"
                             aria-label="Delete"
-                            className="btn_main"
+                            className={`btn_main ${styles.editor_header_action_button}`}
                             style={{
                                 marginLeft: `.5rem`
                             }}
@@ -93,6 +93,22 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
             </div>
         </div>
         <div className={styles.date_section}>
+            <span>
+                <span className={styles.date_label}>
+                    ប្រភេទអត្តបទ៖
+                </span>
+                <span className={styles.editor_header_input_category_container}>
+                    <input
+                        type="text"
+                        name="category"
+                        placeholder={category_from_props.length > 0 ? category_from_props : "មិនកំណត់"}
+                        value={props.category_name}
+                        onChange={handleCategoryInput}
+                        onKeyDown={(e) => { e.key === "Enter" && e.preventDefault() }} // prevent enter key from submitting
+                        className={`${styles.editor_input_text} ${styles.editor_header_input_category}`}
+                    />
+                </span>
+            </span>
             {props.created_at ?
                 <span>
                     <span className={styles.date_label}>
@@ -101,23 +117,12 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                     <time>{(new Date(props.created_at)).toLocaleDateString('km')} - {new Date(props.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
                 </span>
                 : null}
-            <span>
-                <span className={styles.date_label}>
-                    ប្រភេទអត្តបទ៖
-                </span>
-                <span>
-                    <input
-                        type="text"
-                        name="category"
-                        placeholder={category_from_props.length > 0 ? category_from_props : "មិនកំណត់"}
-                        value={props.category_name}
-                        onChange={handleCategoryInput}
-                        onKeyDown={(e) => { e.key === "Enter" && e.preventDefault() }} // prevent enter key from submitting
-                        className={`${styles.editor_input_text}`}
-                    />
-                </span>
-            </span>
         </div>
+        {/* <div className={styles.controls_section}>
+            <button>
+
+            </button>
+        </div> */}
     </section>
 }
 

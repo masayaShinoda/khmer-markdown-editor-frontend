@@ -28,7 +28,7 @@
 .btn_main:hover,
 .btn_main:focus {
   text-decoration: none;
-  filter: brightness(0.975);
+  filter: brightness(0.95);
 }
 
 [data-theme="dark"] .btn_main:hover,
@@ -118,6 +118,21 @@ a.btn_main:hover {
   width: 1.25rem;
   height: 1.25rem;
   margin-right: 0;
+}
+
+.btn_main.btn_main__clr_primary {
+  color: #fff;
+  background-color: var(--clr_primary);
+}
+
+.btn_main.btn_main__clr_secondary {
+  color: #fff;
+  background-color: var(--clr_secondary);
+}
+
+.btn_main.btn_main__clr_primary .icon,
+.btn_main.btn_main__clr_secondary .icon {
+  filter: invert(1) brightness(10);
 }
 
 
@@ -213,6 +228,7 @@ a.btn_main:hover {
 .lds-ring.primary div {
   border-color: var(--clr_primary_shade_a) transparent transparent transparent;
 }
+
 [data-theme="dark"] .lds-ring.primary div {
   border-color: var(--clr_secondary_shade_a) transparent transparent transparent;
 }
