@@ -43,8 +43,18 @@
 
 .editor_header .date_section {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+}
+
+.editor_header .date_section>span:not(:first-of-type) {
+    margin-left: 1rem;
+}
+
+input.editor_header_input_category {
+    background-color: var(--clr_dark_shade_a);
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+    /* border-bottom: 2px dashed var(--clr_grey_shade_d); */
 }
 
 .editor_header .date_label {
@@ -72,14 +82,9 @@
         margin-top: 1rem;
     }
 
-    .editor_header .date_section {
-        flex-direction: row;
-    }
-
     .editor_header .date_section>span {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        display: inline-flex;
+        align-items: center;
         min-width: 45%;
         /* outline: 1px solid red; */
     }
@@ -91,6 +96,42 @@
     .editor_header .date_section>span:not(:last-of-type) {
         margin-right: .5rem;
     }
+}
+
+@media screen and (max-width: 40em) {
+    .editor_header .date_section {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .editor_header .date_section>span {
+        width: 100%;
+        max-width: 100%;
+        /* flex-direction: column;
+        align-items: flex-start; */
+    }
+
+    .editor_header .date_section>span:not(:first-of-type) {
+        margin-left: 0;
+    }
+
+    .editor_header .date_section>span:not(:last-of-type) {
+        margin-bottom: .5rem;
+    }
+
+    
+    .editor_header_input_category_container {
+        width: 100%;
+        /* outline: 1px solid red; */
+    }
+
+    input.editor_header_input_category {
+        width: 100%;
+        padding: .5rem .5rem;
+    }
+
 }
 
 
@@ -132,8 +173,8 @@
 .editor_input_text__title {
     width: 100%;
     font-size: var(--type_scale_4);
-    border-bottom: 2px dashed var(--clr_grey_shade_d);
     margin-right: 1rem;
+    border-bottom: 2px dashed var(--clr_grey_shade_d);
 }
 
 [data-theme="dark"] .editor_input_text__title {
