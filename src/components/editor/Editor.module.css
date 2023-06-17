@@ -77,6 +77,13 @@ input.editor_header_input_category {
     background-color: var(--clr_dark_shade_a);
 }
 
+
+input.editor_header_input_category:focus {
+    background-color: var(--selection_bg_clr);
+}
+
+
+
 .editor_header .date_label {
     color: var(--clr_grey_shade_a);
     margin-right: .325rem;
@@ -119,6 +126,20 @@ input.editor_header_input_category {
 }
 
 @media screen and (max-width: 40em) {
+    .editor_header .top_section {
+        flex-direction: row;
+        align-items: center;
+        /* outline: 1px solid red; */
+    }
+
+    .editor_header_action_buttons {
+        margin-left: .5rem;
+        margin-top: 0;
+    }
+
+}
+
+@media screen and (max-width: 48em) {
     .editor_header .date_section {
         flex-direction: column;
         align-items: flex-start;
@@ -154,6 +175,13 @@ input.editor_header_input_category {
 
 }
 
+@media screen and (max-width: 40em) {
+    .editor_header .date_section {
+        margin-top: 1.5rem;
+        /* outline: 1px solid red; */
+    }
+}
+
 
 .editor_content {
     display: grid;
@@ -187,7 +215,6 @@ input.editor_header_input_category {
     /* border-bottom-color: var(--clr_primary_shade_a); */
     /* background-color: rgba(0,0,0,0.05); */
     background-color: var(--selection_bg_clr);
-    border-radius: .125rem;
 }
 
 .editor_input_text__title {
