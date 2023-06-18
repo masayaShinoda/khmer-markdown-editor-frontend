@@ -109,12 +109,12 @@ const EditorHeader: FunctionComponent<EditorHeaderProps> = (props: EditorHeaderP
                     />
                 </span>
             </span>
-            {props.created_at ?
+            {props.updated_at ?
                 <span>
                     <span className={styles.date_label}>
-                        បង្កើតឡើង៖
+                        កែប្រែចុងក្រោយ៖
                     </span>
-                    <time>{(new Date(props.created_at)).toLocaleDateString('km')} - {new Date(props.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
+                    <time>{(new Date(props.updated_at)).toLocaleDateString('km')} - {new Date(props.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
                 </span>
                 : null}
         </div>
