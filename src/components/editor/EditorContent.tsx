@@ -21,7 +21,9 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
         <button
             type="button"
             onClick={() => setOutputVisible(!outputVisible)}
-            className="btn_main">
+            className="btn_main"
+            style={{margin: `.5rem 0`}}
+        >
             {
                 outputVisible ? "កែអត្តបទ" : "បង្ហាញលទ្ថផល"
             }
