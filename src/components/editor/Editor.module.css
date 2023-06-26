@@ -239,7 +239,8 @@ input.editor_header_input_category:focus {
     width: min(100%, 40em);
     max-width: min(48em, 100%);
 
-    max-height: 48em;
+    min-height: 95vh;
+
     overflow-y: scroll;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -273,7 +274,6 @@ input.editor_header_input_category:focus {
 
 .markdown_output_container {
     padding: 2rem;
-    min-height: 95vh;
     max-width: 100%;
     word-wrap: break-word;
     overflow-y: scroll;
