@@ -9,12 +9,37 @@ interface ArticleContentProps {
 }
 
 const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleContentProps) => {
-    // const [contentModified, setContentModified] = useState(false)
+    const [contentModified, setContentModified] = useState(false)
+
     const [outputVisible, setOutputVisible] = useState(false)
 
     function handleContentInput(e: ChangeEvent<HTMLTextAreaElement>) {
         props.handleContent?.(e.target.value)
+
+        if (!contentModified) {
+            setContentModified(true)
+        }
     }
+
+    // useEffect(() => {
+    //     // the handler for actually showing the prompt
+    //     // https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload
+    //     const handler = (event: BeforeUnloadEvent) => {
+    //         event.preventDefault();
+    //         event.returnValue = "";
+    //     };
+
+    //     // if the form is NOT unchanged, then set the onbeforeunload
+    //     if (formState !== "unchanged") {
+    //         window.addEventListener("beforeunload", handler);
+    //         // clean it up, if the dirty state changes
+    //         return () => {
+    //             window.removeEventListener("beforeunload", handler);
+    //         };
+    //     }
+    //     // since this is not dirty, don't do anything
+    //     return () => { };
+    // }, [formState]);
 
 
     return <>
@@ -22,7 +47,7 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
             type="button"
             onClick={() => setOutputVisible(!outputVisible)}
             className="btn_main"
-            style={{margin: `.5rem 0`}}
+            style={{ margin: `.5rem 0` }}
         >
             {
                 outputVisible ? "កែអត្តបទ" : "បង្ហាញលទ្ថផល"

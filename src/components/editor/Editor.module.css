@@ -239,7 +239,7 @@ input.editor_header_input_category:focus {
     width: min(100%, 40em);
     max-width: min(48em, 100%);
 
-    max-height: 32em;
+    max-height: 48em;
     overflow-y: scroll;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -273,7 +273,7 @@ input.editor_header_input_category:focus {
 
 .markdown_output_container {
     padding: 2rem;
-    min-height: 32em;
+    min-height: 95vh;
     max-width: 100%;
     word-wrap: break-word;
     overflow-y: scroll;
@@ -292,7 +292,7 @@ input.editor_header_input_category:focus {
     }
 }
 
-@media screen and (max-width: 48em) {
+@media screen and (max-width: 40em) {
 
     .editor_textarea,
     .markdown_output_container {
