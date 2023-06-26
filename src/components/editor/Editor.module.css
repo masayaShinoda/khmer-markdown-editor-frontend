@@ -257,7 +257,6 @@ input.editor_header_input_category:focus {
     font-size: var(--type_scale_1);
 
     padding: 2rem;
-    min-height: 32em;
     background-color: #fff;
     box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .075);
 }
