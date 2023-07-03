@@ -46,6 +46,7 @@ const Editor: FunctionComponent = () => {
                 }
                 if (data) {
                     // console.log(data.updated_article)
+                    setUpdatedAt(data.updated_article.updated_at)
                     setConnectionError(false)
                     navigate(`/editor/slug/${data.updated_article.slug}/`) // navigate to new slug
                     setIsSaving(false)
