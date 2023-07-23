@@ -11,7 +11,7 @@ interface ArticleContentProps {
 const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleContentProps) => {
     const [contentModified, setContentModified] = useState(false)
     const [outputVisible, setOutputVisible] = useState(false)
-    const textAreaRef = useRef(null)
+    const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
     function handleContentInput(e: ChangeEvent<HTMLTextAreaElement>) {
         props.handleContent?.(e.target.value)
@@ -20,11 +20,10 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
             setContentModified(true)
         }
         
-        function resizeTextArea() {
+        if(textAreaRef.current !== null) {
             textAreaRef.current.style.height = "auto"
             textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
         }
-        resizeTextArea()
     }
 
 
