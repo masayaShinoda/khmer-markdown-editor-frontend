@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useState } from "react"
+import { ChangeEvent, FunctionComponent, useRef, useState } from "react"
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 // import PromptUserProgress from "../utils/PromptUserProgress"
 import styles from "./Editor.module.css"
@@ -10,8 +10,8 @@ interface ArticleContentProps {
 
 const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleContentProps) => {
     const [contentModified, setContentModified] = useState(false)
-
     const [outputVisible, setOutputVisible] = useState(false)
+    const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
     function handleContentInput(e: ChangeEvent<HTMLTextAreaElement>) {
         props.handleContent?.(e.target.value)
@@ -19,7 +19,13 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
         if (!contentModified) {
             setContentModified(true)
         }
+        
+        if(textAreaRef.current !== null) {
+            textAreaRef.current.style.height = "auto"
+            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
+        }
     }
+
 
     // useEffect(() => {
     //     // the handler for actually showing the prompt
@@ -65,6 +71,8 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
                         required
                         name="content"
                         value={props.content}
+                        ref={textAreaRef}
+                        rows={20}
                         onChange={handleContentInput}
                         placeholder={props.content.length > 0 ? "" : "[សរសេរអត្តបទនៅទីនេះ]"}
                         className={styles.editor_textarea}

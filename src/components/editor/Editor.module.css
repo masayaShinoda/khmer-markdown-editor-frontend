@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  --selection_bg_clr: rgba(0, 79, 134, 0.1);
-
   margin-bottom: 1.5rem;
+  --selection_bg_clr: rgba(0, 79, 134, 0.1);
 }
 
 [data-theme="dark"] .editor_wrapper {
@@ -232,9 +231,9 @@ input.editor_header_input_category:focus {
   width: min(100%, 40em);
   max-width: min(48em, 100%);
 
-  min-height: 95vh;
+  /* min-height: 95vh; */
 
-  overflow-y: scroll;
+  overflow: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
