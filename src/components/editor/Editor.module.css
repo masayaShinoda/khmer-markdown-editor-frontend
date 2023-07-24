@@ -233,7 +233,7 @@ input.editor_header_input_category:focus {
 
   /* min-height: 95vh; */
 
-  overflow: hidden;
+  overflow-y: scroll;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
