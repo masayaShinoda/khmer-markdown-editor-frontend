@@ -21,11 +21,9 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
         }
 
         const current_scroll_position = window.scrollY
-        console.log("current_scroll_position: ", current_scroll_position)
-        
+
         resizeTextArea()
         window.scroll(0, current_scroll_position)
-        console.log("new current_scroll_position: ", current_scroll_position)
     }
 
 
