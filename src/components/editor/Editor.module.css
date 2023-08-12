@@ -228,8 +228,8 @@ input.editor_header_input_category:focus {
 
 .editor_textarea,
 .markdown_output_container {
-  width: min(100%, 40em);
-  max-width: min(48em, 100%);
+  width: min(100%, 48em);
+  max-width: min(100%, 48em);
 
   /* min-height: 95vh; */
 
