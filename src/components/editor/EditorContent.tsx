@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useRef, useState } from "react"
+import { ChangeEvent, FunctionComponent, useRef, useState, useEffect } from "react"
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 // import PromptUserProgress from "../utils/PromptUserProgress"
 import styles from "./Editor.module.css"
@@ -18,22 +18,26 @@ const EditorContent: FunctionComponent<ArticleContentProps> = (props: ArticleCon
 
         if (!contentModified) {
             setContentModified(true)
-        }        
+        }
 
-        // resizeTextArea()
+        const current_scroll_position = window.scrollY
+
+        resizeTextArea()
+        window.scroll(0, current_scroll_position)
     }
 
-    // function resizeTextArea() {
-    //     if(textAreaRef.current !== null) {
-    //         textAreaRef.current.style.height = "auto"
-    //         textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
-    //     }
-    // }
 
-    // useEffect(() => {
-    //     // make sure textarea height is properly set on mount
-    //     resizeTextArea()
-    // }, [])
+    function resizeTextArea() {
+        if (textAreaRef.current !== null) {
+            textAreaRef.current.style.height = "auto"
+            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
+        }
+    }
+
+    useEffect(() => {
+        // make sure textarea height is properly set on mount
+        resizeTextArea()
+    }, [])
 
 
     // useEffect(() => {
