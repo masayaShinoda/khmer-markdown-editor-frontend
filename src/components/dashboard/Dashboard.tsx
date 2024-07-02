@@ -12,7 +12,7 @@ import LoadingSpinner from "../utils/LoadingSpinner"
 import styles from "./Dashboard.module.css"
 
 const Dashboard: FunctionComponent = () => {
-  const { user, accessToken } = useContext(UserContext)
+  const context = useContext(UserContext);
 
   interface Article {
     key: number,
@@ -31,7 +31,7 @@ const Dashboard: FunctionComponent = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${accessToken}`
+          "Authorization": `Bearer ${context?.accessToken}`
         }
       }
     )
@@ -59,15 +59,15 @@ const Dashboard: FunctionComponent = () => {
           return "Error fetching data."
         }
       })
-  }, [accessToken])
+  }, [context?.accessToken])
 
   return <>
     <div style={{ display: `flex`, justifyContent: `space-between`, alignItems: `center` }}>
       <h1>ទំព័រដើម</h1>
-      {user ?
+      {context?.user ?
         <p>
           <i className="icon account" style={{ width: `.75rem`, height: `.75rem`, marginRight: `.5rem` }}></i>
-          ឈ្មោះគណនី៖ <Link to="/account">{user.username}</Link>
+          ឈ្មោះគណនី៖ <Link to="/account">{context?.user.username}</Link>
         </p>
         : null}
     </div>

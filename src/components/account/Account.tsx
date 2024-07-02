@@ -1,13 +1,13 @@
-import { FunctionComponent, useContext } from "react"
-import { UserContext } from "../../context/UserContext"
-import AccountDetails from "./AccountDetails"
+import { FunctionComponent, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import AccountDetails from "./AccountDetails";
 
 const Account: FunctionComponent = () => {
-    const { user } = useContext(UserContext)
+    const context = useContext(UserContext);
 
     return <>
-        <AccountDetails user={user} />
-    </>
+        {context?.user && <AccountDetails user={context.user} />}
+    </>;
 }
 
-export default Account
+export default Account;
