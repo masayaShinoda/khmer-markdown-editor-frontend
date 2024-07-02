@@ -1,45 +1,42 @@
-import { FormEvent, FunctionComponent, useContext, useState, useEffect } from "react"
-import { UserContext } from "../../context/UserContext"
-import { Link, useNavigate, useLocation, Navigate } from "react-router-dom"
-import LoadingSpinner from "../utils/LoadingSpinner"
-import ToastMessage from "../utils/ToastMessage"
-import login from "../../utils/login"
-import styles from "./Account.module.css"
+import { FormEvent, FunctionComponent, useContext, useState, useEffect } from "react";
+import { UserContext, UserContextType } from "../../context/UserContext";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
+import LoadingSpinner from "../utils/LoadingSpinner";
+import ToastMessage from "../utils/ToastMessage";
+import login from "../../utils/login";
+import styles from "./Account.module.css";
 
 const LoginForm: FunctionComponent = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const router_message = location.state?.message? location.state.message : null
+    const router_message = location.state?.message ?? null;
 
-    const { user, setUser, setAccessToken } = useContext(UserContext)
+    const { user, setUser, setAccessToken } = useContext(UserContext) as UserContextType;
 
-    const [username, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    const [activeToastMsg, setActiveToastMsg] = useState<string | null>(null)
+    const [activeToastMsg, setActiveToastMsg] = useState<string | null>(null);
 
-    const [routerMsg, setRouterMsg] = useState(null)
-    const [inputsAreEmpty, setInputsAreEmpty] = useState<boolean>(true)
-    const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false)
-    const [connectionError, setConnectionError] = useState<boolean>(false)
+    const [routerMsg, setRouterMsg] = useState<string | null>(null);
+    const [inputsAreEmpty, setInputsAreEmpty] = useState<boolean>(true);
+    const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false);
+    const [connectionError, setConnectionError] = useState<boolean>(false);
 
-    const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
-    const [submitBtnLoading, setSubmitBtnLoading] = useState<boolean>(false)
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false);
+    const [submitBtnLoading, setSubmitBtnLoading] = useState<boolean>(false);
 
-
-    // handle empty inputs
     useEffect(() => {
-        if(username.length === 0 || password.length === 0) {
-            setInputsAreEmpty(true)
-            setSubmitBtnDisabled(true)
+        if (username.length === 0 || password.length === 0) {
+            setInputsAreEmpty(true);
+            setSubmitBtnDisabled(true);
         } else {
-            setInputsAreEmpty(false)
-            setSubmitBtnDisabled(false)
+            setInputsAreEmpty(false);
+            setSubmitBtnDisabled(false);
         }
-    }, [username, password])
+    }, [username, password]);
 
-    // object to store possible toast message contents, and their corresponding class names
     const ToastMessages = {
         "routerMsg": {
             "message": routerMsg,
@@ -53,88 +50,80 @@ const LoginForm: FunctionComponent = () => {
             "message": "កម្មវិធីមានបញ្ហាក្នុងការភ្ជាប់ទៅកាន់សេវាកម្ម។ សូមព្យាយាមម្តងទៀត។",
             "util_classes": "clr_danger bg_clr_danger_translucent",
         }
-    }
+    };
 
-    // react to message passed from react-router-dom's useLocation()
     useEffect(() => {
-        if(router_message) {
-            setRouterMsg(router_message)
+        if (router_message) {
+            setRouterMsg(router_message);
         }
-    }, [router_message])
+    }, [router_message]);
 
-    // change activeToastMsg according to newest message state update
     useEffect(() => {
-        if(routerMsg) {
-            setActiveToastMsg("routerMsg")
+        if (routerMsg) {
+            setActiveToastMsg("routerMsg");
         }
-        if(invalidCredentials) {
-            setActiveToastMsg("invalidCredentials")
+        if (invalidCredentials) {
+            setActiveToastMsg("invalidCredentials");
         }
-        if(connectionError) {
-            setActiveToastMsg("connectionError")
+        if (connectionError) {
+            setActiveToastMsg("connectionError");
         }
-    }, [routerMsg, invalidCredentials, connectionError])
+    }, [routerMsg, invalidCredentials, connectionError]);
 
-
-    
     function handleSubmit(e: FormEvent) {
-        e.preventDefault()
+        e.preventDefault();
 
-        // display loading spinner
-        setSubmitBtnLoading(true)
+        setSubmitBtnLoading(true);
+        setSubmitBtnDisabled(true);
 
-        // disable button whilst requesting login
-        setSubmitBtnDisabled(true)
-
-        // hide error messages
-        setInvalidCredentials(false)
-        setConnectionError(false)
+        setInvalidCredentials(false);
+        setConnectionError(false);
 
         login(username, password)
             .then(data => {
-                // re-enable submit button & remove loading spinner
-                setSubmitBtnDisabled(false)
-                setSubmitBtnLoading(false)
+                setSubmitBtnDisabled(false);
+                setSubmitBtnLoading(false);
 
-                if(data.error) {
-                    setConnectionError(true)
-                    return
+                if (data.error) {
+                    setConnectionError(true);
+                    return;
                 }
-                if(data.access) {
-                    // hide any previous invalid credentials error message
-                    setInvalidCredentials(false)
-                    // set user in context
+                if (data.access) {
                     setUser({
                         username: username
-                    })
-                    // set auth token in context
-                    setAccessToken(data.access)
-                    // store access token in localstorage
-                    localStorage.setItem("access_token", data.access)
-                    // redirect to homepage using react router
-                    navigate('/')                    
-                } else {                    
-                    setInvalidCredentials(true)
-                    // clear input fields
-                    setUsername("")
-                    setPassword("")
+                    });
+                    setAccessToken(data.access);
+                    localStorage.setItem("access_token", data.access);
+                    console.log("Login successful. User set:", username);
+                    navigate('/');
+                } else {
+                    setInvalidCredentials(true);
+                    setUsername("");
+                    setPassword("");
+                    console.log("Invalid credentials. User not set.");
                 }
             })
+            .catch(err => {
+                console.error("Login error:", err);
+                setSubmitBtnDisabled(false);
+                setSubmitBtnLoading(false);
+                setConnectionError(true);
+            });
     }
 
-    if(user !== null) {
-        return <Navigate to={'/'} />
+    if (user !== null) {
+        return <Navigate to={'/'} />;
     } else {
         return <>
             <h2>ចូលគណនី</h2>
-            <div style={{marginBottom: `1rem`}}>
+            <div style={{ marginBottom: `1rem` }}>
                 <Link to="/register" className="utils type_scale_2">បង្កើតគណនីថ្មី →</Link>
             </div>
             <div className={styles.form_wrapper}>
                 <form onSubmit={handleSubmit}>
                     <div className="input_wrapper">
                         <label htmlFor="username">ឈ្មោះគណនី</label>
-                        <input 
+                        <input
                             type="text"
                             id="username"
                             name="username"
@@ -147,7 +136,7 @@ const LoginForm: FunctionComponent = () => {
                     </div>
                     <div className="input_wrapper">
                         <label htmlFor="password">ពាក្យសម្ងាត់</label>
-                        <input 
+                        <input
                             type="password"
                             id="password"
                             name="password"
@@ -159,15 +148,15 @@ const LoginForm: FunctionComponent = () => {
                         />
                     </div>
                     <div className={styles.action_section}>
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             className={
                                 `btn_main scale_2 utils ${submitBtnDisabled !== true ? "bg_clr_secondary" : ""} clr_light`
-                            } 
-                            disabled={inputsAreEmpty || submitBtnDisabled ? true : false}
+                            }
+                            disabled={inputsAreEmpty || submitBtnDisabled}
                             aria-label="Sign in"
                         >
-                            {submitBtnLoading ? <div style={{marginRight: `.25rem`}}><LoadingSpinner /></div> : null}
+                            {submitBtnLoading ? <div style={{ marginRight: `.25rem` }}><LoadingSpinner /></div> : null}
                             <span>ចូល</span>
                         </button>
                     </div>
@@ -187,4 +176,4 @@ const LoginForm: FunctionComponent = () => {
     }
 }
 
-export default LoginForm
+export default LoginForm;

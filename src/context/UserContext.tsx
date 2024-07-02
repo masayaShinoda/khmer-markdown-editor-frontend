@@ -1,62 +1,72 @@
-import { ReactNode, SetStateAction, createContext, useEffect, useState } from "react"
-import check_token from "../utils/check_token"
+import { ReactNode, createContext, useEffect, useState } from "react";
+import check_token from "../utils/check_token";
 
 export interface User {
     username: string,
 }
 
-export const UserContext = createContext<string | SetStateAction<User> | SetStateAction<string> | SetStateAction<any> | object | null>(null)
+export interface UserContextType {
+    user: User | null;
+    accessToken: string | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export const UserContext = createContext<UserContextType | null>(null);
 
 interface UserProviderProps {
     children: ReactNode,
 }
 
-export const UserProvider = (props: UserProviderProps) => {
-    const [user, setUser] = useState<User | null>(null)
-    const [accessToken, setAccessToken] = useState<string | null>(null)
-    const [contextData, setContextData] = useState({})
+export const UserProvider = ({ children }: UserProviderProps) => {
+    const [user, setUser] = useState<User | null>(null);
+    const [accessToken, setAccessToken] = useState<string | null>(null);
 
-    // check localstorage for access token
+    // Check local storage for access token
     useEffect(() => {
-        const stored_access_token = localStorage.getItem("access_token")
-        if(stored_access_token) {
-            setAccessToken(stored_access_token)
+        const stored_access_token = localStorage.getItem("access_token");
+        if (stored_access_token) {
+            setAccessToken(stored_access_token);
+            // console.log("Access token found in localStorage:", stored_access_token);
         }
-    }, [])
+    }, []);
 
+    // Validate the token
     useEffect(() => {
-        if(accessToken) {
-            //  react to an update in access token, check if it's still valid
+        if (accessToken) {
             check_token(accessToken)
                 .then(response => {
-                    if(response.user_id) {
-                        // token is still valid
+                    if (response.user_id) {
                         setUser({
                             username: response.username,
-                        })
+                        });
+                        console.log("Token is valid. User set:", response.username);
                     } else {
-                        // token is no longer valid
-                        setAccessToken(null)
-                        setUser(null)
-                        localStorage.removeItem("access_token")
-                        // react router will handle redirect to '/login'
+                        setAccessToken(null);
+                        setUser(null);
+                        localStorage.removeItem("access_token");
+                        console.log("Token is invalid. Access token and user cleared.");
                     }
                 })
+                .catch(err => {
+                    console.error("Token validation error:", err);
+                    setAccessToken(null);
+                    setUser(null);
+                    localStorage.removeItem("access_token");
+                });
         }
-    }, [accessToken])
+    }, [accessToken]);
 
-    useEffect(() => {
-        setContextData({
-            user: user,
-            accessToken: accessToken,
-            setUser: setUser,
-            setAccessToken: setAccessToken,
-        })
-    }, [user, accessToken])
+    const contextValue: UserContextType = {
+        user,
+        accessToken,
+        setUser,
+        setAccessToken
+    };
 
     return (
-        <UserContext.Provider value={contextData}>
-            {props.children}
+        <UserContext.Provider value={contextValue}>
+            {children}
         </UserContext.Provider>
-    )
-}
+    );
+};
